@@ -1,0 +1,23 @@
+aliexpress:
+  browser_type: 'Js'
+  url: https://aliexpress.com
+  q: https://aliexpress.ru/wholesale?catId=&SearchText=
+  search_bar_class: SearchHeader_SearchInput
+  search_selector:
+    name: 'SearchText'
+  found_elements_class: SearchProductFeed
+  product_list_css: '[class^="SearchProductFeed"] ul li ul li'
+  attributes:
+    product-price_original: '[class^="SearchProductFeed_Price__"]'
+    product-final_price: '[class^="SearchProductFeed_Price__finalPriceContainer__"]'
+    product-full_price: '[class^="SearchProductFeed_Price__fullPrice__"]'
+    product-link: '[class^="SearchProductFeed_GalleryCard__title"] a'
+    product-title: '[class^="SearchProductFeed_GalleryCard__title"] a'
+    product-delivery: '[class^="SearchProductFeed_Price__freeDelivery__"]'
+    product-sale_count: '[class^="SearchProductFeed_Quality__quality"] a'
+
+
+yandex:
+  q: https://yandex.ru/search/?lr=213&text=
+  url: https://yandex.ru
+  browser_type: 'html'

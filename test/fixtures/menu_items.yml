@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  position: 
+  title: MyString
+  body: MyText
+  menu: one
+
+two:
+  name: MyText
+  position: 
+  title: MyString
+  body: MyText
+  menu: two
