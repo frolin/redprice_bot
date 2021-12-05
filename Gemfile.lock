@@ -232,7 +232,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     telegram-bot (0.15.4)
       actionpack (>= 4.0, < 6.2)
       activesupport (>= 4.0, < 6.2)
@@ -290,7 +289,6 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sidekiq-scheduler
-  sqlite3 (~> 1.4)
   telegram-bot
   tzinfo-data
   web-console (>= 4.1.0)
