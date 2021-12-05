@@ -13,7 +13,6 @@ module RedpriceBot
 
     # to use encrypted secrets in rake tasks on production env
     config.read_encrypted_secrets = (Rails.env == 'production')
-    
 
     # Configuration for the application, engines, and railties goes here.
     #
