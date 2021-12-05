@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_181747) do
+ActiveRecord::Schema.define(version: 2021_12_04_124917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,5 +44,28 @@ ActiveRecord::Schema.define(version: 2021_11_24_181747) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "request_results", force: :cascade do |t|
+    t.jsonb "data"
+    t.string "title"
+    t.bigint "request_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_id"], name: "index_request_results_on_request_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.jsonb "result", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.jsonb "preference", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "menu_items", "menus"
+  add_foreign_key "request_results", "requests"
 end

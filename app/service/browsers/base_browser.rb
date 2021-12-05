@@ -3,18 +3,14 @@ module Browsers
 	class BaseBrowser
 		CONFIG_PATH = "config/sites_config.yml"
 
-		attr_reader :results
+		attr_reader :results, :config
 
 		def initialize(sitename, search_text)
 			@search_text = search_text
 			@sitename = sitename
-			@site_config = config[sitename]
-			@browser_type = config[sitename][:browser_type]
-			@search_url = config[sitename][:q]
-			@search_query = @search_url + search_text
-			@url = config[sitename][:url]
-			@attributes = config[sitename][:attributes]
-			@config = config[sitename]
+			@config = config.dig(sitename)
+			@attributes = config[:attributes]
+			@search_query = config[:q] + search_text
 
 			@results = []
 		end
@@ -24,14 +20,15 @@ module Browsers
 		end
 
 		def browser_klass
-			"Browsers::#{@browser_type}Browser".constantize
+			@browser_klass ||= "Browsers::#{config[:browser_type]}Browser".constantize
 		end
 
 		def find
-			browser_klass.new(@sitename, @search_text).found
+			@find ||= browser_klass.new(@sitename, @search_text).found
+			request = Request.new.build_result(data: @find).save!
 
 		rescue StandardError => e
-			Rails.logger.error("#{e}, element not found")
+			Rails.logger.error("browser crashed: #{e}")
 			nil
 		end
 

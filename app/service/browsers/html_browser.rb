@@ -7,7 +7,6 @@ module Browsers
 		def found
 			begin
 				@found ||= browser.get(@search_query)
-				binding.pry
 				found_list
 			rescue Mechanize::ResponseReadError => e
 				@errors = e.force_parse
@@ -21,7 +20,6 @@ module Browsers
 		end
 
 		def found_list
-
 			@found_list ||= @found.search("[class^='#{@site_config[:found_elements_class]}_']")
 			# @found_list ||= @found.search("[class^='SearchProductFeed_Preview']")
 		end

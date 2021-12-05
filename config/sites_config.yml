@@ -8,13 +8,13 @@ aliexpress:
   found_elements_class: SearchProductFeed
   product_list_css: '[class^="SearchProductFeed"] ul li ul li'
   attributes:
-    product-price_original: '[class^="SearchProductFeed_Price__"]'
-    product-final_price: '[class^="SearchProductFeed_Price__finalPriceContainer__"]'
-    product-full_price: '[class^="SearchProductFeed_Price__fullPrice__"]'
-    product-link: '[class^="SearchProductFeed_GalleryCard__title"] a'
-    product-title: '[class^="SearchProductFeed_GalleryCard__title"] a'
-    product-delivery: '[class^="SearchProductFeed_Price__freeDelivery__"]'
-    product-sale_count: '[class^="SearchProductFeed_Quality__quality"] a'
+    price_original: '[class^="SearchProductFeed_Price__"]'
+    final_price: '[class^="SearchProductFeed_Price__finalPriceContainer__"]'
+    full_price: '[class^="SearchProductFeed_Price__fullPrice__"]'
+    link: '[class^="SearchProductFeed_GalleryCard__title"] a'
+    title: '[class^="SearchProductFeed_GalleryCard__title"] a'
+    delivery: '[class^="SearchProductFeed_Price__freeDelivery__"]'
+    sale_count: '[class^="SearchProductFeed_Quality__quality"] a'
 
 
 yandex:

@@ -71,3 +71,6 @@ gem 'selenium-webdriver', require: false
 # gem 'rails_semantic_logger'
 #
 gem 'mechanize'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'active_interaction', '~> 4.0'

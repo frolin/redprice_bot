@@ -1,7 +1,9 @@
 class CheckPriceProcess
 
 	def self.check(sitename, search_text)
-		Browsers::BaseBrowser.new(sitename, search_text).find
+		# job_params ={[sitename, search_text]
+
+		ParserWorker.perform_async(sitename, search_text)
 	end
 
 end
