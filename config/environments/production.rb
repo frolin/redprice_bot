@@ -3,6 +3,10 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+      # Telegram session store
+  config.cache_store = :redis_store, ENV['REDIS_URL']
+  config.telegram_updates_controller.session_store = :redis_store, {expires_in: 1.month}
+  config.active_record.cache_versioning = false
   routes.default_url_options = {host: 'https://redprice-bot.herokuapp.com/', protocol: 'https'}
 
   # Code is not reloaded between requests.
