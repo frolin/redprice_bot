@@ -12,10 +12,9 @@ module RedpriceBot
     config.load_defaults 6.1
 
     # Telegram session store
+    config.cache_store = :redis_store, ENV['REDIS_URL']
     config.telegram_updates_controller.session_store = :redis_store, {expires_in: 1.month}
-
     # to use encrypted secrets in rake tasks on production env
-    config.read_encrypted_secrets = (Rails.env == 'production')
 
     # Configuration for the application, engines, and railties goes here.
     #
