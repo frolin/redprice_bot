@@ -19,7 +19,7 @@ en:
     inline_keyboard:
       check_price: Проверить цены
       products_list: Список товаров
-      prompt: 'Выбери чего хочешь'
+      prompt: 'что будем делать?'
       repo: Посмотри ссылку бро
     inline_query:
       content: Content
@@ -45,5 +45,5 @@ en:
       content: Hi there!
       alert: Answer with alert
       no_alert: Without alert
-      prompt: 'Выбери чего хочешь'
+      prompt: 'что будем делать?'
       repo: Open gem repo

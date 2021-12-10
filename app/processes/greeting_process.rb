@@ -1,7 +1,7 @@
 class GreetingProcess
 
-	def self.call
-		'Салют братишка'
+	def self.call(from)
+		"Салют, бро #{from['first_name']}"
 	end
 
 end

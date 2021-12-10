@@ -4,7 +4,7 @@ module Browsers
 			super(sitename, search_text)
 		end
 
-		def found
+		def process
 			begin
 				@found ||= browser.get(@search_query)
 				found_list

@@ -21,3 +21,10 @@ yandex:
   q: https://yandex.ru/search/?lr=213&text=
   url: https://yandex.ru
   browser_type: 'html'
+
+yandex_market:
+  product:
+    title_css: 'h1'
+    price: ''
+
+  list:

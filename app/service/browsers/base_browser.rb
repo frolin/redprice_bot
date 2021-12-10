@@ -5,12 +5,13 @@ module Browsers
 
 		attr_reader :results, :config
 
-		def initialize(sitename, search_text)
+		def initialize(sitename, search_text, url)
 			@search_text = search_text
 			@sitename = sitename
 			@config = config.dig(sitename)
 			@attributes = config[:attributes]
-			@search_query = config[:q] + search_text
+			@search_query = url || config[:q] + search_text
+			@url = url
 
 			@results = []
 		end
@@ -24,8 +25,10 @@ module Browsers
 		end
 
 		def find
-			@find ||= browser_klass.new(@sitename, @search_text).found
-			request = Request.new.build_result(data: @find).save!
+			@find ||= browser_klass.new(@sitename, @search_text).process
+			request = Request.new.build_result(data: @find)
+			request.max_price = @find.select(:final_price).max
+			request.save!
 
 		rescue StandardError => e
 			Rails.logger.error("browser crashed: #{e}")

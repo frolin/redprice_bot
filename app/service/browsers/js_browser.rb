@@ -2,24 +2,74 @@ require "selenium-webdriver"
 
 module Browsers
 	class JsBrowser < BaseBrowser
-		def initialize(sitename, search_text)
-			super(sitename, search_text)
+		def initialize(sitename:, search_text: nil, url: nil)
+			super(sitename, search_text, url)
 			@wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 		end
 
-		def found
-			browser.get @search_query
-			products_list = @wait.until { browser.find_elements(css: config[:product_list_css]) }
+		def process
+			product_page = browser.get @search_query
 
-			extract_products_list_data(products_list)
+			# binding.pry
+			# razcapcha if capcha?
+			# extract_products_list_data(products_list)
+
+			extract_product_data(product_page)
 			close_browser
 
 			results
 		end
 
+		def process_capcha
+			checkbox if capcha.present?
+			capcha_picture_url if capcha_picture.present?
+		end
+
+		def checkbox
+			checkbox_css = '.CheckboxCaptcha-Checkbox'
+			checkbox_el = browser.find_element(css: checkbox_css)
+
+			browser.execute_script('document.write("<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>");')
+			browser.execute_script("Jquery$('#{checkbox_css}').setAttribute('aria-checked','true');")
+			sleep 1
+			browser.find_element(css: '.CheckboxCaptcha-Button').click
+		end
+
+		def capcha?
+			browser.find_element(css: '.CheckboxCaptcha-Anchor')
+		end
+
+		def capcha_picture
+			browser.find_element(css: '.AdvancedCaptcha-Image')
+		end
+
+		def capcha_picture_url
+			@capcha_picture ||= @wait.until { browser.find_element(css: '.AdvancedCaptcha-Image').attribute('src') } rescue nil
+		end
+
 		def browser
+			options = %w[disable-gpu no-sandbox window-size=412,915 enable-javascript start-maximized]
+
 			@browser ||= Selenium::WebDriver.for :chrome, capabilities:
 				[Selenium::WebDriver::Chrome::Options.new(args: options)]
+		end
+
+		def extract_products
+			products_list = @wait.until { browser.find_elements(css: config[:product_list_css]) }
+			extract_products_list_data(products_list)
+		end
+
+		def extract_product_data(product)
+			@attributes.each do |type, value|
+				begin
+					element = product.find_element(css: value)
+					result["#{type}".to_sym] = attribute_type(type, element)
+
+				rescue StandardError => e
+					Rails.logger.error("#{e}, element not found")
+					nil
+				end
+			end
 		end
 
 		def extract_products_list_data(products_list)
@@ -41,19 +91,6 @@ module Browsers
 			end
 
 			results
-		end
-
-		def options
-			%w[headless disable-gpu no-sandbox window-size=1024,768 enable-javascript start-maximized]
-			# options = Selenium::WebDriver::Chrome::Options.new
-			# options.add_argument('--headless')
-			# options.add_argument('--enable-javascript')
-			# options.add_argument('--no-sandbox')
-			# options.add_argument('--ignore-certificate-errors')
-			# options.add_argument('--allow-insecure-localhost')
-			# options.add_argument("--window-size=1920,1080")
-			# options.add_argument("--start-maximized")
-			# options
 		end
 
 		def selenium_capabilities_chrome

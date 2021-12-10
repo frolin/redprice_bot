@@ -1,13 +1,26 @@
 class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	include Telegram::Bot::UpdatesController::MessageContext
 
+	use_session!
+
 	def start!(*)
-		respond_with :message, text: GreetingProcess.call
+		respond_with :message, text: GreetingProcess.call(from)
 		inline_keyboard!
 	end
 
 	def help!(*)
 		respond_with :message, text: t('.content')
+	end
+
+	def add_url!(url = nil, *)
+		binding.pry
+		if url
+			respond_with :message, text: 'Добовляю товар...'
+			AddBasicProduct.call(from, url)
+		else
+			save_context :add_url!
+			respond_with :message, text: 'кидай ссылку:'
+		end
 	end
 
 	def list!(*)
@@ -52,39 +65,44 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 		respond_with :message, text: t('.prompt'), reply_markup: {
 			inline_keyboard: [
 				[
-					{ text: 'Проверить цену', callback_data: 'check_price' },
+					{ text: 'Добавить товар', callback_data: 'add_url' },
 					{ text: 'Список товаров', callback_data: 'products_list' },
 				],
-				[{ text: t('.repo'), url: 'https://github.com/telegram-bot-rb/telegram-bot' }],
+			# [{ text: t('.repo'), url: 'https://github.com/telegram-bot-rb/telegram-bot' }],
 			],
 		}
 	end
 
 	def callback_query(data)
 		case data
+		when 'add_url'
+			add_url!
 		when 'check_price'
 			answer_callback_query 'проверяю цены'
 			answer_inline_query price_check
 		when 'products_list'
-			products_list
+
 		else
 			answer_callback_query t('.no_alert')
 		end
 	end
 
-	def products_list
-		products = Product.all.select(:name, :min_price, :max_price)
-		i = 0
+	def product
+		respond_with :message, text: Request.last.max_price
+	end
 
-		products_list = products.map do |product|
-			i += 1
-			"#{i}: " +
-			"#{product.name} \n " +
-			"мин.цена: #{product.min_price}, " +
-			"макс.цена: #{product.max_price}"
-		end.join("\n")
+	def products_list(product)
+		# products = Product.all.select(:name, :min_price, :max_price)
+		# i = 0
+		#
+		# products_list = products.map do |product|
+		# 	i += 1
+		# 	"#{i}: " +
+		# 	"#{product.name} \n " +
+		# 	"мин.цена: #{product.min_price}, " +
+		# 	"макс.цена: #{product.max_price}"
+		# end.join("\n")
 
-		respond_with :message, text: products_list
 	end
 
 	def price_check
@@ -92,7 +110,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	end
 
 	def inline_query(query, _offset)
-		query = query.first(10) # it's just an example, don't use large queries.
+		query = query.first(1) # it's just an example, don't use large queries.
 		t_description = t('.description')
 		t_content = t('.content')
 		results = Array.new(5) do |i|
@@ -125,6 +143,15 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	end
 
 	def message(message)
+
+		if message['reply_to_message'].present?
+			case message.dig('reply_to_message', 'text')
+
+			when 'кидай ссылку:'
+				add_url!(message['text'])
+			end
+
+		end
 		respond_with :message, text: t('.content', text: message['text'])
 	end
 
