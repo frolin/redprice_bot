@@ -2,19 +2,19 @@ require "selenium-webdriver"
 
 module Browsers
 	class JsBrowser < BaseBrowser
-		def initialize(sitename:, search_text: nil, url: nil)
-			super(sitename, search_text, url)
+		def initialize(sitename:, url:, search_text: nil)
+			super(sitename: sitename, url: url)
 			@wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 		end
 
 		def process
-			product_page = browser.get @search_query
+			browser.get @search_query
 
 			# binding.pry
 			# razcapcha if capcha?
 			# extract_products_list_data(products_list)
 
-			extract_product_data(product_page)
+			extract_product_data
 			close_browser
 
 			results
@@ -59,12 +59,13 @@ module Browsers
 			extract_products_list_data(products_list)
 		end
 
-		def extract_product_data(product)
+		def extract_product_data
+			result = {}
+
 			@attributes.each do |type, value|
 				begin
-					element = product.find_element(css: value)
+					element = browser.find_element(css: value)
 					result["#{type}".to_sym] = attribute_type(type, element)
-
 				rescue StandardError => e
 					Rails.logger.error("#{e}, element not found")
 					nil
@@ -78,6 +79,7 @@ module Browsers
 
 				@attributes.each do |type, value|
 					begin
+						binding.pry
 						element = product.find_element(css: value)
 						result["#{type}".to_sym] = attribute_type(type, element)
 

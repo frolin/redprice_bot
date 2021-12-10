@@ -1,5 +1,5 @@
 class AddBasicProduct
-	def self.call(from, url, sitename: 'yandex')
-		Browsers::JsBrowser.new(sitename: sitename, url: url).process
+	def self.call(from, url, sitename: 'yandex_market')
+		Browsers::BaseBrowser.new(sitename: sitename, url: url).find
 	end
 end

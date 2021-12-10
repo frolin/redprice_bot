@@ -23,8 +23,7 @@ yandex:
   browser_type: 'html'
 
 yandex_market:
-  product:
-    title_css: 'h1'
-    price: ''
+  browser_type: 'Js'
 
-  list:
+  attributes:
+    title_css: 'h1'

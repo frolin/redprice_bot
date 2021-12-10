@@ -5,7 +5,7 @@ module Browsers
 
 		attr_reader :results, :config
 
-		def initialize(sitename, search_text, url)
+		def initialize(sitename:, url:, search_text: nil)
 			@search_text = search_text
 			@sitename = sitename
 			@config = config.dig(sitename)
@@ -25,7 +25,8 @@ module Browsers
 		end
 
 		def find
-			@find ||= browser_klass.new(@sitename, @search_text).process
+			@find ||= browser_klass.new(sitename: @sitename, url: @url).process
+
 			request = Request.new.build_result(data: @find)
 			request.max_price = @find.select(:final_price).max
 			request.save!
