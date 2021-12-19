@@ -26,9 +26,8 @@ module Browsers
 
 		def find
 			@find ||= browser_klass.new(sitename: @sitename, url: @url).process
-
 			request = Request.new.build_result(data: @find)
-			request.max_price = @find.select(:final_price).max
+			# request.max_price = @find.select(:final_price).max
 			request.save!
 
 		rescue StandardError => e

@@ -1,4 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: requests
+#
+#  id         :bigint           not null, primary key
+#  result     :jsonb
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  price      :decimal(8, 2)
+#
 
 one:
   result: 

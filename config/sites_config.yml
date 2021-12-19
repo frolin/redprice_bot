@@ -23,7 +23,16 @@ yandex:
   browser_type: 'html'
 
 yandex_market:
-  browser_type: 'Js'
-
+#  browser_type: 'Js'
+  attributes:
+    row: "data-zone-name='OfferSnippet'"
+    title_data: "data-zone-name='title'"
+    price_data: "data-autotest-currency='₽'"
+ozon:
   attributes:
     title_css: 'h1'
+    price_data: "data-widget='webSale'"
+
+
+
+

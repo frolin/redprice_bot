@@ -65,6 +65,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     awesome_print (1.9.2)
     bindex (0.8.1)
     bootsnap (1.9.3)
@@ -143,11 +146,9 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-doc (1.2.0)
-      pry (~> 0.11)
-      yard (~> 0.9.11)
-    pry-nav (1.0.0)
-      pry (>= 0.9.10, < 0.15)
+    pry-byebug (3.8.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
@@ -277,7 +278,6 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.26)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -285,6 +285,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_interaction (~> 4.0)
+  annotate
   awesome_print
   bootsnap (>= 1.4.4)
   byebug
@@ -295,8 +296,7 @@ DEPENDENCIES
   mechanize
   pg
   pry
-  pry-doc
-  pry-nav
+  pry-byebug
   pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

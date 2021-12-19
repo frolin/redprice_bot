@@ -25,7 +25,7 @@ development:
   <<: *default
   database: red_price
   username: postgres
-  password: 'postgres'
+  password: postgres
   host: 0.0.0.0
 
 test:

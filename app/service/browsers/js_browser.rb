@@ -8,8 +8,12 @@ module Browsers
 		end
 
 		def process
+			new_tab = browser.manage.new_window
+			browser.switch_to.window new_tab
 			browser.get @search_query
 
+
+			# browser.ExecuteScript("window.open(#{@search_query}, '_blank');");
 			# binding.pry
 			# razcapcha if capcha?
 			# extract_products_list_data(products_list)
@@ -64,13 +68,18 @@ module Browsers
 
 			@attributes.each do |type, value|
 				begin
-					element = browser.find_element(css: value)
-					result["#{type}".to_sym] = attribute_type(type, element)
+					name = type.split('_').first.to_sym
+
+					element = find_element_type(type, value)
+					result[name] = attribute_type(type, element)
 				rescue StandardError => e
 					Rails.logger.error("#{e}, element not found")
 					nil
 				end
 			end
+			binding.pry
+			result[:url] = @search_query
+			results << result
 		end
 
 		def extract_products_list_data(products_list)
@@ -79,7 +88,7 @@ module Browsers
 
 				@attributes.each do |type, value|
 					begin
-						binding.pry
+						find_element_type(type, value)
 						element = product.find_element(css: value)
 						result["#{type}".to_sym] = attribute_type(type, element)
 
@@ -107,14 +116,38 @@ module Browsers
 		end
 
 		def attribute_type(type, element)
-			type.split('-').include?('link') ? element.attribute(:href) : element.text
+			type = type.split('_').last
+
+			case type
+			when 'link' then
+				element.attribute(:href)
+			when 'css' then
+				element.text
+			else
+				element
+			end
+
 		rescue
 			nil
 		end
 
 		def close_browser
-			browser.quit
+			# browser.quit
 			Rails.logger.debug('quit browser')
+		end
+
+		def find_element_type(type, value)
+			type = type.split('_').last
+
+			case type
+			when 'data'
+				element = @wait.until { browser.find_element(xpath: "//*[@#{value}]").attribute("innerHTML") }
+				element = ActionView::Base.full_sanitizer.sanitize(element)
+			else
+				element = @wait.until { browser.find_element(css: value) }
+			end
+
+			element
 		end
 
 	end

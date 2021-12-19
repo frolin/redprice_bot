@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_000833) do
+ActiveRecord::Schema.define(version: 2021_12_19_181445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_000833) do
     t.jsonb "data", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "request_results", force: :cascade do |t|
@@ -57,16 +59,39 @@ ActiveRecord::Schema.define(version: 2021_12_06_000833) do
     t.jsonb "result", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "price", precision: 8, scale: 2
+    t.string "price"
+  end
+
+  create_table "store_requests", force: :cascade do |t|
+    t.bigint "store_id", null: false
+    t.bigint "request_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_id"], name: "index_store_requests_on_request_id"
+    t.index ["store_id"], name: "index_store_requests_on_store_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.jsonb "config", default: {}
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_stores_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.jsonb "preference", default: {}
+    t.jsonb "preferences", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "menu_items", "menus"
+  add_foreign_key "products", "users"
   add_foreign_key "request_results", "requests"
+  add_foreign_key "store_requests", "requests"
+  add_foreign_key "store_requests", "stores"
+  add_foreign_key "stores", "products"
 end

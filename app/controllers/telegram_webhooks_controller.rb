@@ -15,11 +15,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	def add_url!(url = nil, *)
 		if url
 			respond_with :message, text: 'Добовляю товар...'
-			binding.pry
 			AddBasicProduct.call(from, url)
 		else
 			save_context :add_url!
-			respond_with :message, text: 'кидай ссылку:'
+			respond_with :message, text: 'кидай ссылку:', reply_markup: {
+				selective: true,
+				force_reply: true
+			}
 		end
 	end
 
