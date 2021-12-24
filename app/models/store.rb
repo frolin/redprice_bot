@@ -16,7 +16,5 @@ class Store < ApplicationRecord
 	has_many :store_requests
 	has_many :requests, through: :store_requests
 
-
-
 	store_accessor :config, :ozone, :wildberries, :yandex_market, :sber_market, :aliexpress
 end

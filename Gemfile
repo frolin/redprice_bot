@@ -77,3 +77,10 @@ gem 'sidekiq-scheduler'
 gem 'active_interaction', '~> 4.0'
 
 gem 'redis-rails', '~> 5'
+
+# XLS
+gem 'roo'
+# Download
+gem 'down'
+
+gem "mechanize"
