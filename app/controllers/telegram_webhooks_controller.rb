@@ -4,7 +4,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	use_session!
 
 	def start!(*)
-		respond_with :message, text: GreetingProcess.call(from)
+		respond_with :message, text: Telegram::GreetingProcess.call(from)
 		inline_keyboard!
 	end
 
@@ -15,10 +15,15 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	def add_url!(url = nil, *)
 		if url
 			respond_with :message, text: 'Добовляю товар...'
-			AddBasicProduct.call(from, url)
+			# AddBasicProduct.call(from, url)
+			added = Import::Products.new(from, url).process
+
+			respond_with :message, text: "Продуктов #{added.size} успешно добавлено"
+			respond_with :message, text: "Готовлю таблицу с результатами."
+
 		else
 			save_context :add_url!
-			respond_with :message, text: 'кидай ссылку:', reply_markup: {
+			respond_with :message, text: 'кидай ссылку на таблицу:', reply_markup: {
 				selective: true,
 				force_reply: true
 			}
