@@ -1,35 +1,17 @@
-class DownloadFile
-	PATH = 'public/download/csv'
+class DownloadFile < ActiveInteraction::Base
+	string :url
 
-	def initialize(url:, format: 'csv')
-		@url = url
-		@tempfile = Down.download(@url)
+	validate do
+		errors.add(:base, 'нет файла') if file.blank?
 	end
 
-	def self.download(url:, format: 'csv')
-		new(url: url).download_file
+	def execute
+		file
 	end
 
 	def file
-		file_name =  File.basename(@tempfile.path)
-
-		@file ||= "#{PATH}/#{file_name}"
-	end
-
-	def download_file
-		if new_file?
-			FileUtils.mv(@tempfile.path, file)
-			Rails.logger.info "Download file to #{file}"
-
-			file
-		else
-			Rails.logger.info 'File already exists with same size'
-
-			file
-		end
-	end
-
-	def new_file?
-		!File.exists?(file) # && !FileUtils.compare_file(@tempfile, file)
+		@file ||= Down.download(url)
+	rescue => e
+		Rails.logger.error(e.message)
 	end
 end

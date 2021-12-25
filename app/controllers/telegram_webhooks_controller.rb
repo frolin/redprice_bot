@@ -1,4 +1,11 @@
 class TelegramWebhooksController < Telegram::Bot::UpdatesController
+
+	### AUTH
+		class AuthorizationError < StandardError; end
+		before_action :authorize!
+		rescue_from 'AuthorizationError', with: :deny_access
+	###
+
 	include Telegram::Bot::UpdatesController::MessageContext
 
 	use_session!
@@ -14,12 +21,17 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
 	def add_url!(url = nil, *)
 		if url
-			respond_with :message, text: 'Добовляю товар...'
-			# AddBasicProduct.call(from, url)
-			added = Import::Products.new(from, url).process
+			import_data = Import::Products.run(username: from['username'], url: url)
 
-			respond_with :message, text: "Продуктов #{added.size} успешно добавлено"
-			respond_with :message, text: "Готовлю таблицу с результатами."
+			respond_with :message, text: 'Добовляю товар...'
+
+			if import_data.valid?
+				respond_with :message, text: "Продуктов #{import_data.results.size} успешно добавлено"
+				respond_with :message, text: "Продуктов #{import_data.errors.size} не добавлено добавлено"
+				respond_with :message, text: "Готовлю таблицу с результатами."
+			else
+				respond_with :message, text: "Ошибка: #{import_data.errors.full_messages.join("\n")}"
+			end
 
 		else
 			save_context :add_url!
@@ -168,4 +180,20 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 			             text: t('telegram_webhooks.action_missing.command', command: action_options[:command])
 		end
 	end
+
+	private
+
+	def authorize!
+		username = from['username']
+		return true if User.find_by(username: username)
+
+		raise AuthorizationError
+	end
+
+	def deny_access
+		username = from['username']
+
+		respond_with :message, text: "Кто вы #{username}? Я вас не знаю, обратитесь к адиминстратору"
+	end
+
 end

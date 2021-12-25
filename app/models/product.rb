@@ -13,4 +13,6 @@
 class Product < ApplicationRecord
 	belongs_to :user
 	has_many :stores
+
+	validates_uniqueness_of :name
 end

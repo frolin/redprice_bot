@@ -1,31 +1,37 @@
 module Import
-	class Products
+	class Products < ActiveInteraction::Base
+		string :username
+		string :url
+
+		validate do
+			errors.add(:username, 'Нет доступа') if user.blank?
+			errors.add(:base, 'не праввильная ссылка на файл') unless file.valid?
+		end
 
 		PRODUCT_NAME = 'Наименование '
 		MIN_PRICE = 'мин цена (если есть)'
 
-		def initialize(user, url)
-			@url = url
-			@user = user
-		end
 
-		def process
-			add = []
-			csv = GetData::SpreadSheet.new(url: @url).process
+		def execute
+			csv = file.result
+
+
 			csv.each do |row|
 				@row = row
-
-				binding.pry
 
 				add_product_data
 				add_store_data
 
-				product.save!
-
-				add << product
+				if product.save
+					@results << { product: product, stores: product.stores }
+				else
+					@errors << product.errors.full_messages.join("\n")
+				end
 			end
+		end
 
-			add
+		def file
+			@file ||= GetData::Spreadsheet.run(url: @url)
 		end
 
 		def add_product_data
@@ -37,16 +43,20 @@ module Import
 		def add_store_data
 			clean_columns
 
-			product.stores.new(config: @row.to_h)
+			@row.to_h.each { |name, url| product.stores.new(name: name, url: url) }
 		end
 
 		def product
-			@product ||= User.first.products.new
+			@product ||= user.products.new
 		end
 
 		def clean_columns
 			[PRODUCT_NAME, MIN_PRICE].each { |col| @row.delete(col) }
 		end
 
+		def user
+			binding.pry
+			@user ||= User.find_by(username: username)
+		end
 	end
 end

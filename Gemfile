@@ -84,3 +84,4 @@ gem 'roo'
 gem 'down'
 
 gem "mechanize"
+gem 'active_interaction', '~> 4.0'
