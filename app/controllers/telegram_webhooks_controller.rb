@@ -21,13 +21,13 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
 	def add_url!(url = nil, *)
 		if url
-			import_data = Import::Products.run(username: from['username'], url: url)
+			import_data = Import::Products.run(user: user, url: url)
 
 			respond_with :message, text: 'Добовляю товар...'
 
 			if import_data.valid?
-				respond_with :message, text: "Продуктов #{import_data.results.size} успешно добавлено"
-				respond_with :message, text: "Продуктов #{import_data.errors.size} не добавлено добавлено"
+				respond_with :message, text: "Продуктов успешно добавлено: #{import_data.result[:results].size} "
+				respond_with :message, text: "Продуктов не добавлено: #{import_data.result[:errors]}" if import_data.result[:errors].present?
 				respond_with :message, text: "Готовлю таблицу с результатами."
 			else
 				respond_with :message, text: "Ошибка: #{import_data.errors.full_messages.join("\n")}"
@@ -183,16 +183,21 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
 	private
 
+	def username
+		@username ||= from['username']
+	end
+
+	def user
+		@user ||= User.find_by(username: username)
+	end
+
 	def authorize!
-		username = from['username']
-		return true if User.find_by(username: username)
+		return true if user
 
 		raise AuthorizationError
 	end
 
 	def deny_access
-		username = from['username']
-
 		respond_with :message, text: "Кто вы #{username}? Я вас не знаю, обратитесь к адиминстратору"
 	end
 

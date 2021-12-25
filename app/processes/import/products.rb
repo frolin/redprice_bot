@@ -1,6 +1,6 @@
 module Import
 	class Products < ActiveInteraction::Base
-		string :username
+		record :user
 		string :url
 
 		validate do
@@ -11,10 +11,10 @@ module Import
 		PRODUCT_NAME = 'Наименование '
 		MIN_PRICE = 'мин цена (если есть)'
 
-
 		def execute
+			results = []
+			errors = []
 			csv = file.result
-
 
 			csv.each do |row|
 				@row = row
@@ -23,11 +23,13 @@ module Import
 				add_store_data
 
 				if product.save
-					@results << { product: product, stores: product.stores }
+					results << { product: product, stores: product.stores }
 				else
-					@errors << product.errors.full_messages.join("\n")
+					errors << { name: product.name, error: product.errors.full_messages.join("\n") }
 				end
 			end
+
+			{ results: results, errors: errors }
 		end
 
 		def file
@@ -55,7 +57,6 @@ module Import
 		end
 
 		def user
-			binding.pry
 			@user ||= User.find_by(username: username)
 		end
 	end

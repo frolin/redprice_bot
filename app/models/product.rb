@@ -14,5 +14,5 @@ class Product < ApplicationRecord
 	belongs_to :user
 	has_many :stores
 
-	validates_uniqueness_of :name
+	validates_uniqueness_of :name, scope: :user_id
 end
