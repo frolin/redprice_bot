@@ -22,8 +22,7 @@ yandex:
   url: https://yandex.ru
   browser_type: 'html'
 
-yandex_market:
-#  browser_type: 'Js'
+ym:
   attributes:
     row: "data-zone-name='OfferSnippet'"
     title_data: "data-zone-name='title'"
@@ -31,8 +30,31 @@ yandex_market:
 ozon:
   attributes:
     title_css: 'h1'
-    price_data: "data-widget='webSale'"
+    price_data: 'data-widget="webPrice"'
 
+wb:
+  attributes:
+    title_css: '.same-part-kt__header'
+    final_price: '.price-block__final-price'
+    old_price: '.price-block__old-price'
+    order_quantity: '.same-part-kt__order-quantity'
+    count_review: '.same-part-kt__count-review'
+
+ym_f:
+  attributes:
+    name: "data-zone-name='title'"
+    price: "data-zone-name='price'"
+    more_prices: "data-zone-name='more-prices'"
+
+#    price_data: "data-widget='webSale'"
+Sber:
+  attributes:
+    title_css: 'h1'
+#    price_data: "data-widget='webSale'"
+aliexpress:
+  attributes:
+    title_css: 'h1'
+#    price_data: "data-widget='webSale'"
 
 
 

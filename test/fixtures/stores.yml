@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: stores
+# Table name: store
 #
 #  id         :bigint           not null, primary key
 #  name       :string

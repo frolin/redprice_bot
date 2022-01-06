@@ -42,14 +42,17 @@
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v6.1.4.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.8.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="annotate (v3.1.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="audited (v5.0.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="awesome_print (v1.9.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.9.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bullet (v7.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.18, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.36.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v4.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cliver (v0.3.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coderay (v1.1.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.9, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v2.2.5, RVM: ruby-3.0.1) [gem]" level="application" />
@@ -57,13 +60,26 @@
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.4.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="domain_name (v0.5.20190701, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="down (v5.2.4, RVM: ruby-3.0.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="e2mmap (v0.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="et-orbi (v1.2.6, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday (v1.8.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-em_http (v1.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-em_synchrony (v1.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-excon (v1.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-httpclient (v1.0.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-net_http (v1.0.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-net_http_persistent (v1.2.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-patron (v1.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday-rack (v1.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ferrum (v0.11, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.4, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ffi-compiler (v1.0.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fugit (v1.5.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.6.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="http (v4.4.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.4, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="http-form_data (v2.3.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="http-parser (v1.2.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="httpclient (v2.8.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.11, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.3, RVM: ruby-3.0.1) [gem]" level="application" />
@@ -79,11 +95,13 @@
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.14.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.4.2, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multipart-post (v2.1.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-http-digest_auth (v1.4.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-http-persistent (v4.0.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.12.5, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.2.3, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="proxy_fetcher (v0.15.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.14.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry-byebug (v3.8.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry-rails (v0.3.9, RVM: ruby-3.0.1) [gem]" level="application" />
@@ -102,34 +120,40 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.11.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.1, RVM: ruby-3.0.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rbs (v1.0.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis (v4.1.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-actionpack (v5.2.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-activesupport (v5.2.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-rack (v2.1.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-rails (v5.0.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-store (v1.9.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.1.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.5, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="roo (v2.8.3, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby2_keywords (v0.0.5, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyntlm (v0.6.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v2.3.2, RVM: ruby-3.0.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rufus-scheduler (v3.8.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v6.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassc-rails (v2.1.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sentry-rails (v4.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sentry-ruby (v4.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sentry-ruby-core (v4.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sentry-sidekiq (v4.8.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sidekiq (v5.2.9, RVM: ruby-3.0.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sidekiq-scheduler (v3.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sidekiq-cron (v1.2.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.2, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.1, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="telegram-bot (v0.15.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="thwait (v0.2.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf (v0.1.4, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf_ext (v0.0.8, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="uniform_notifier (v1.14.2, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="watir (v7.1.0, RVM: ruby-3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="watir-rails (v2.2.3, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webdrivers (v5.0.0, RVM: ruby-3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webrick (v1.7.0, RVM: ruby-3.0.1) [gem]" level="application" />
@@ -147,9 +171,13 @@
     <option name="generators">
       <list>
         <option value="active_record:application_record" />
+        <option value="annotate:install" />
         <option value="application_record" />
         <option value="assets" />
+        <option value="audited:install" />
+        <option value="audited:upgrade" />
         <option value="benchmark" />
+        <option value="bullet:install" />
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
@@ -165,6 +193,7 @@
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="sidekiq:worker" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
@@ -177,9 +206,13 @@
     <option name="myGenerators">
       <list>
         <option value="active_record:application_record" />
+        <option value="annotate:install" />
         <option value="application_record" />
         <option value="assets" />
+        <option value="audited:install" />
+        <option value="audited:upgrade" />
         <option value="benchmark" />
+        <option value="bullet:install" />
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
@@ -195,6 +228,7 @@
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="sidekiq:worker" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />

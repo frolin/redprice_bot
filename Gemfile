@@ -15,6 +15,7 @@ gem 'sass-rails', '>= 6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
+gem 'active_interaction', '~> 4.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -46,13 +47,12 @@ group :development do
   gem 'pry'
   gem 'pry-rails'
 	gem 'pry-byebug'
-
+  gem 'bullet'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
@@ -73,15 +73,21 @@ gem 'selenium-webdriver', require: false
 #
 gem 'mechanize'
 gem 'sidekiq'
-gem 'sidekiq-scheduler'
-gem 'active_interaction', '~> 4.0'
+gem 'sidekiq-cron'
 
 gem 'redis-rails', '~> 5'
+gem 'redis-namespace'
 
 # XLS
 gem 'roo'
 # Download
 gem 'down'
 
-gem "mechanize"
-gem 'active_interaction', '~> 4.0'
+gem 'audited', '~> 5.0'
+
+gem "sentry-ruby"
+gem "sentry-rails"
+gem "sentry-sidekiq"
+gem 'proxy_fetcher', '~> 0.14'
+gem "watir-rails"
+gem "ferrum"

@@ -1,8 +1,8 @@
 class ParserWorker
   include Sidekiq::Worker
 
-  def perform(sitename, search_text)
-    Rails.logger.info("Start worker for parse")
-    Browsers::BaseBrowser.new(sitename, search_text).find
+  def perform(user_id)
+    Rails.logger.info("Start worker for parsing")
+    ParseStores.new(user_id)
   end
 end

@@ -1,20 +1,78 @@
 require "selenium-webdriver"
 
 class Browser
-	def initialize(url)
+
+	def initialize(browser = :chrome, url)
+		@browser = browser
 		@url = url
 	end
 
-	def process
-		browser.get @url
-
-		browser
+	def run
+		case @browser
+		when :firefox
+			firefox.get @url
+			firefox
+		when :chrome
+			chrome.get @url
+			chrome
+		when :watir
+			watir.goto @url
+			watir
+		end
 	end
 
-	def browser
-		options = %w[disable-gpu no-sandbox window-size=412,915 enable-javascript start-maximized]
+	private
 
-		@browser ||= Selenium::WebDriver.for :chrome, capabilities:
-			[Selenium::WebDriver::Chrome::Options.new(args: options)]
+	def chrome
+		# window-size=1280,960
+
+		# proxy = Selenium::WebDriver::Proxy.new(http: take_proxy)
+		# cap = Selenium::WebDriver::Remote::Capabilities.chrome(proxy: proxy)
+
+		#
+		options = %w[no-sandbox enable-javascript start-maximized ]
+		options = Selenium::WebDriver::Chrome::Options.new(args: options)
+		options.add_option 'excludeSwitches', ['enable-automation']
+
+		options.add_argument('lang=ru')
+		options.add_argument("disable-blink-features")
+		options.add_argument("disable-blink-features=AutomationControlled")
+
+		options.add_argument('window-size=1920x1080')
+		options.add_argument('disable-gpu')
+		options.add_argument('disable-geolocation')
+		options.add_argument('ignore-certificate-errors')
+		options.add_argument('disable-popup-blocking')
+		options.add_argument('disable-web-security')
+		options.add_argument('disable-infobars')
+		options.add_argument('disable-translate')
+		options.add_argument('allow-profiles-outside-user-dir')
+		options.add_argument("user-data-dir=/home/seluser/chrome_profile")
+		options.add_argument("profile-directory=Profile 1")
+		# options.add_argument("profiling-flush=10")
+		options.add_argument("enable-aggressive-domstorage-flushing")
+		# options.add_argument("headless")
+
+		# @chrome ||= Selenium::WebDriver.for(:chrome, capabilities: [options])
+		@chrome ||= Selenium::WebDriver.for(:remote, :url => 'http://0.0.0.0:4444/wd/hub', capabilities: [options])
+
+		# @browser ||= Selenium::WebDriver.for :chrome, capabilities:
+		# 	[Selenium::WebDriver::Chrome::Options.new(args: options), Selenium::WebDriver::Proxy.new(http: take_proxy)]
 	end
+
+	def take_proxy
+		proxy_list = ProxyFetcher::Manager.new(filters: { country: 'RU', maxtime: '500' })
+		proxy_list.raw_proxies.sample.delete('//')
+	end
+
+	def firefox
+		options = Selenium::WebDriver::Firefox::Options.new(args: [''])
+
+		driver = Selenium::WebDriver.for(:firefox, options: options)
+	end
+
+	def watir
+		browser = Watir::Browser.new :chrome, proxy: { http: take_proxy }
+	end
+
 end

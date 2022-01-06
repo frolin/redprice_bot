@@ -1,6 +1,6 @@
 module Telegram
 
-	class GreetingProcess
+	class Greeting
 
 		def self.call(from)
 			"Салют, бро #{from['first_name']}"

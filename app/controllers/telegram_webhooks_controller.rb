@@ -1,9 +1,10 @@
 class TelegramWebhooksController < Telegram::Bot::UpdatesController
 
 	### AUTH
-		class AuthorizationError < StandardError; end
-		before_action :authorize!
-		rescue_from 'AuthorizationError', with: :deny_access
+	class AuthorizationError < StandardError; end
+
+	before_action :authorize!
+	rescue_from 'AuthorizationError', with: :deny_access
 	###
 
 	include Telegram::Bot::UpdatesController::MessageContext
@@ -11,7 +12,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	use_session!
 
 	def start!(*)
-		respond_with :message, text: Telegram::GreetingProcess.call(from)
+		respond_with :message, text: Telegram::Greeting.call(from), parse_mode: 'HTML'
 		inline_keyboard!
 	end
 
@@ -23,22 +24,19 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 		if url
 			import_data = Import::Products.run(user: user, url: url)
 
-			respond_with :message, text: 'Добовляю товар...'
-
 			if import_data.valid?
-				respond_with :message, text: "Продуктов успешно добавлено: #{import_data.result[:results].size} "
-				respond_with :message, text: "Продуктов не добавлено: #{import_data.result[:errors]}" if import_data.result[:errors].present?
-				respond_with :message, text: "Готовлю таблицу с результатами."
+				respond_with :message, text: Telegram::ImportReport.call(user, import_data.result)
 			else
-				respond_with :message, text: "Ошибка: #{import_data.errors.full_messages.join("\n")}"
+				respond_with :message, text: "Ошибка: #{import_data.errors}"
 			end
 
 		else
-			save_context :add_url!
 			respond_with :message, text: 'кидай ссылку на таблицу:', reply_markup: {
 				selective: true,
 				force_reply: true
 			}
+
+			save_context :add_url!
 		end
 	end
 
@@ -47,7 +45,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	end
 
 	def products
-		Product.pluck(:name, :min_price, :max_price)
+		respond_with :message, text: inline_query(Product, 0)
 	end
 
 	def memo!(*args)
@@ -100,15 +98,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 			answer_callback_query 'проверяю цены'
 			answer_inline_query price_check
 		when 'products_list'
-
+			products
 		else
 			answer_callback_query t('.no_alert')
 		end
 	end
 
-	def product
-		respond_with :message, text: Request.last.max_price
-	end
 
 	def products_list(product)
 		# products = Product.all.select(:name, :min_price, :max_price)
@@ -129,7 +124,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	end
 
 	def inline_query(query, _offset)
-		query = query.first(1) # it's just an example, don't use large queries.
+		query = query # it's just an example, don't use large queries.
 		t_description = t('.description')
 		t_content = t('.content')
 		results = Array.new(5) do |i|
@@ -162,15 +157,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
 	end
 
 	def message(message)
-
 		if message['reply_to_message'].present?
 			case message.dig('reply_to_message', 'text')
 
-			when 'кидай ссылку:'
+			when 'кидай ссылку на таблицу:'
 				add_url!(message['text'])
 			end
-
 		end
+
 		respond_with :message, text: t('.content', text: message['text'])
 	end
 

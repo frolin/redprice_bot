@@ -77,7 +77,7 @@ module Browsers
 					nil
 				end
 			end
-			binding.pry
+
 			result[:url] = @search_query
 			results << result
 		end

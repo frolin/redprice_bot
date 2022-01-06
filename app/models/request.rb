@@ -6,18 +6,22 @@
 #  result     :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  price      :decimal(8, 2)
+#  price      :string
 #
 class Request < ApplicationRecord
-	# has_one :result, class_name: 'RequestResult'
+	audited
 
-	has_many :store_requests
-  has_many :stores, through: :store_requests
+	belongs_to :store
 
-	validates :price, presence: true
 
-	def max_price
-		result.data.map { |d| d['final_price'].match(/\d+(?:,\d+)?/ )  }
-	end
+	# has_many :store_requests
+	# has_many :stores, through: :store_requests
+	# has_one :store, -> { self.stores.last }
+	# validates :price, presence: true
 
+	store_accessor :result, :url, :sale_price, :old_price, :raw_data, :result_errors
+
+	# def max_price
+	# 	result.data.map { |d| d['final_price'].match(/\d+(?:,\d+)?/) }
+	# end
 end
