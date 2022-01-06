@@ -1,0 +1,8 @@
+[0105/034245.828170:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: PRAGMA auto_vacuum
+[0105/034245.828366:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: PRAGMA journal_mode=TRUNCATE
+[0105/034246.830730:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: PRAGMA cache_size=500
+[0105/034246.830793:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0105/034246.830834:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0105/034246.830854:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0105/034246.830871:ERROR:database.cc(1773)] Quota SQLite error: code 5 errno 0: database is locked sql: CREATE TABLE meta(key LONGVARCHAR NOT NULL UNIQUE PRIMARY KEY, value LONGVARCHAR)
+[0105/034246.830893:ERROR:quota_database.cc(747)] Could not open the quota database, resetting.

@@ -5,15 +5,35 @@ networks:
     driver: bridge
 
 services:
+  db:
+    image: postgres
+    hostname: db
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    network_mode: host
+    restart: unless-stopped
+
   chrome:
     image: selenium/standalone-chrome-debug:latest
     # Debug version enables VNC ability
     ports:
       - '4444:4444'
       - '5900:5900'
-    # Bind selenium port & VNC port
-#    logging:
-#      driver: none
+      # Bind selenium port & VNC port
+      #    logging:
+      #      driver: none
       # Disable noisy logs.
     networks:
       - default
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

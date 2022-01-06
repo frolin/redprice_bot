@@ -1,0 +1,15 @@
+2022/01/05-03:42:13.438 1336cc Reusing MANIFEST /home/frolin/Projects/redprice_bot/config/chrome_profile/Profile 1/Local Storage/leveldb/MANIFEST-000001
+2022/01/05-03:42:13.439 1336cc Recovering log #15
+2022/01/05-03:42:13.439 1336cc Reusing old log /home/frolin/Projects/redprice_bot/config/chrome_profile/Profile 1/Local Storage/leveldb/000015.log 
+2022/01/05-03:42:16.169 1336ca Level-0 table #19: started
+2022/01/05-03:42:16.176 1336ca Level-0 table #19: 14596 bytes OK
+2022/01/05-03:42:16.180 1336ca Delete type=0 #15
+2022/01/05-03:42:16.181 1336ca Compacting 4@0 + 1@1 files
+2022/01/05-03:42:16.184 1336ca Generated table #20@0: 29 keys, 7987 bytes
+2022/01/05-03:42:16.184 1336ca Compacted 4@0 + 1@1 files => 7987 bytes
+2022/01/05-03:42:16.187 1336ca compacted to: files[ 0 1 1 0 0 0 0 ]
+2022/01/05-03:42:16.189 1336ca Delete type=2 #13
+2022/01/05-03:42:16.189 1336ca Delete type=2 #16
+2022/01/05-03:42:16.189 1336ca Delete type=2 #19
+2022/01/05-03:42:16.189 1336ca Delete type=2 #8
+2022/01/05-03:42:16.189 1336ca Delete type=2 #11
