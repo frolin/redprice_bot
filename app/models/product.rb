@@ -19,7 +19,7 @@ class Product < ApplicationRecord
 
 	# after_commit :change_message
 
-	store_accessor :data,  :min_price, :sale, :old_price, :discount
+	store_accessor :data,  :min_price, :sale, :old_price, :discount, :more_price
 
 	def favorite_store
 		stores.find_by('stores.slug = ?', 'ym_f')

@@ -22,8 +22,10 @@ class Notify::Telegram
 
 		if @product.sale?
 			message += "Старая цена: #{price_format(@product.old_price)} \n"
-			message += "Скидкв: #{@product.discount} % "
+			message += "Скидкв: #{@product.discount} % \n"
 		end
+
+		message += "#{price_format(@product.more_price)}\n"
 
 		send_message(message)
 	end

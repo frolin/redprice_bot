@@ -137,9 +137,9 @@ module Import
 			def check_min_price(product, request)
 				if product.min_price.blank? || product.min_price < request.price
 					if request.sale?
-						product.update!(min_price: request.price, sale: request.sale, old_price: request.old_price, discount: request.discount)
+						product.update!(min_price: request.price, sale: request.sale, old_price: request.old_price, discount: request.discount, more_price: request.raw_data['more_prices'])
 					else
-						product.update!(min_price: request.price, sale: false)
+						product.update!(min_price: request.price, sale: false, more_price:request.raw_data['more_prices'])
 					end
 				end
 			end

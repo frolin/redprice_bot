@@ -12,7 +12,7 @@ class Request < ApplicationRecord
 	audited
 
 	belongs_to :store
-	store_accessor :result, :url, :price, :old_price, :discount, :raw_data, :sale, :result_errors
+	store_accessor :result, :url, :price, :old_price, :discount, :sale, :more_price, :raw_data, :result_errors
 
 	# has_many :store_requests
 	# has_many :stores, through: :store_requests
