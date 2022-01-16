@@ -12,18 +12,25 @@
 #  user_id    :bigint           not null
 #
 class Product < ApplicationRecord
-	belongs_to :user
-	has_many :stores
+	audited
 
+	belongs_to :user
+	has_many :stores, dependent: :destroy
+
+	# after_commit :change_message
+
+	store_accessor :data,  :min_price, :sale, :old_price, :discount
 
 	def favorite_store
 		stores.find_by('stores.slug = ?', 'ym_f')
 	end
 
-
-	def min_price
-		self.favorite_store.min_price
+	def min_price_changes
+		favorite_store.requests.last.audits.last.audited_changes['price']
 	end
 
+	def sale?
+		self.sale
+	end
 
 end

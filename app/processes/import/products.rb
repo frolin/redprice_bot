@@ -1,7 +1,7 @@
 module Import
 	class Products < ActiveInteraction::Base
 		symbol :type
-		record :user
+		integer :user_id
 
 		def execute
 			case type
@@ -12,9 +12,9 @@ module Import
 			end
 		end
 
-
 		def user
-			@user ||= User.find_by(username: username)
+			@user ||= User.find_by(id: user_id)
 		end
+
 	end
 end

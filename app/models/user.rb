@@ -11,6 +11,8 @@
 class User < ApplicationRecord
 	has_many :products
 
+	store_accessor :preferences, :telegram
+
 	FAVORITES_URL = 'https://market.yandex.ru/my/wishlist'
 
 	def favorites_url

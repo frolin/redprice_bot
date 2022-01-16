@@ -14,3 +14,6 @@ menu.menu_items.new(title: 'Сделай так')
 menu.menu_items.new(title: 'Сделай иначе')
 
 menu.save!
+
+
+User.create(username: 'fralunia')

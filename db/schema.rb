@@ -58,13 +58,11 @@ ActiveRecord::Schema.define(version: 2022_01_03_084657) do
   end
 
   create_table "products", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "name"
-    t.integer "min_price"
-    t.integer "max_price"
     t.jsonb "data", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -120,5 +118,4 @@ ActiveRecord::Schema.define(version: 2022_01_03_084657) do
   add_foreign_key "requests", "stores"
   add_foreign_key "store_requests", "requests"
   add_foreign_key "store_requests", "stores"
-  add_foreign_key "stores", "products"
 end

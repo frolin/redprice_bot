@@ -4,3 +4,9 @@ parse_stores_job:
   queue: default
   active_job: true
   args: "fralunia"
+
+ya_favorites_check_worker:
+  cron: "*/20 * * * *" # execute at every 1 minute
+  class: "YaFavoritesCheckWorker"
+  queue: default
+  args: "1"

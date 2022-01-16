@@ -33,7 +33,6 @@ module Store::Type
 			errors.add(:base, 'error no price or data found') if min_price.blank?
 			errors.add(:base, 'all data not found') if all_data.blank?
 
-			binding.pry
 
 			{ 'all_data' => all_data, 'price' => min_price }
 		end

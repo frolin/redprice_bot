@@ -53,11 +53,8 @@ class Browser
 		options.add_argument("enable-aggressive-domstorage-flushing")
 		# options.add_argument("headless")
 
-		# @chrome ||= Selenium::WebDriver.for(:chrome, capabilities: [options])
-		@chrome ||= Selenium::WebDriver.for(:remote, :url => 'http://0.0.0.0:4444/wd/hub', capabilities: [options])
 
-		# @browser ||= Selenium::WebDriver.for :chrome, capabilities:
-		# 	[Selenium::WebDriver::Chrome::Options.new(args: options), Selenium::WebDriver::Proxy.new(http: take_proxy)]
+		@chrome ||= Selenium::WebDriver.for(:remote, :url => 'http://0.0.0.0:4444/wd/hub', capabilities: [options])
 	end
 
 	def take_proxy
