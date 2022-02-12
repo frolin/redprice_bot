@@ -21,8 +21,7 @@ RUN apk add --update --no-cache \
       openssl \
       pkgconfig \
       postgresql-dev \
-      python \
-      tzdata
+      tzdata \
 
 COPY Gemfile Gemfile.lock ./
 
