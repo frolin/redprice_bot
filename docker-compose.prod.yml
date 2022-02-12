@@ -46,7 +46,7 @@ services:
 
   redis:
     image: redis
-    ports:
+    command: redis-server
 
 volumes:
   postgres:
