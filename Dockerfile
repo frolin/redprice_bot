@@ -1,4 +1,4 @@
-FROM ruby:3-alpine AS ruby_base
+FROM ruby:3.0.1-alpine AS ruby_base
 
 ENV APP_HOME="/red_price_bot"
 RUN apk --no-cache add \
