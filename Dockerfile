@@ -23,9 +23,9 @@ RUN apk add --update --no-cache \
       postgresql-dev \
       tzdata \
 
-COPY Gemfile Gemfile.lock ./
-
 WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
 
 RUN gem install bundler
 RUN bundle check || bundle install
