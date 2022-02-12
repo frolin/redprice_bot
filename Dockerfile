@@ -6,7 +6,7 @@ RUN apk --no-cache add \
     curl tar git bash openssh-client pv less mc vim nano \
     postgresql-dev postgresql-client
 
-#COPY ./.bashrc /root
+COPY ./Gemfile /Gemfile
 
 WORKDIR $APP_HOME
 
