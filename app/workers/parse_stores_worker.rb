@@ -1,4 +1,4 @@
-class ParseStoresWorker < ApplicationJob
+class ParseStoresWorker
 	include Sidekiq::Worker
 
 	def perform(username)
