@@ -19,7 +19,7 @@ services:
       - "5432:5432"
 
   bot:
-#    build: .
+    build: .
     command: bash -c "rake telegram:bot:set_webhook RAILS_ENV=production"
     volumes:
       - .:/myapp
