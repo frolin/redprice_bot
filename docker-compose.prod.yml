@@ -54,7 +54,7 @@ services:
     environment:
       RAILS_ENV: production
     volumes:
-      - .:/myapp
+      - .:/app
     env_file:
     - .env
 
