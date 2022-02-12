@@ -1,9 +1,9 @@
-parse_stores_job:
-  cron: "*/1 * * * *" # execute at every 1 minute
-  class: "ParseStoresJob"
-  queue: default
-  active_job: true
-  args: "fralunia"
+#parse_stores_job:
+#  cron: "*/1 * * * *" # execute at every 1 minute
+#  class: "ParseStoresJob"
+#  queue: default
+#  active_job: true
+#  args: "fralunia"
 
 ya_favorites_check_worker:
   cron: "*/20 * * * *" # execute at every 1 minute
