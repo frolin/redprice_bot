@@ -18,6 +18,16 @@ services:
     ports:
       - "5432:5432"
 
+  bot:
+    build: .
+    command: bash -c "rake telegram:bot:set_webhook RAILS_ENV=production"
+#    volumes:
+#      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
   chrome:
     image: selenium/standalone-chrome-debug:latest
     # Debug version enables VNC ability

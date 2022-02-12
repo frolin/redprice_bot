@@ -1,0 +1,2 @@
+bot: rake telegram:bot:poller
+worker: bundle exec sidekiq

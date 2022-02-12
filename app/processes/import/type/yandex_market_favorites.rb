@@ -21,6 +21,7 @@ module Import
 
 				wait = Selenium::WebDriver::Wait.new(:timeout => 30) # seconds
 
+				# binding.pry
 				articles = wait.until { favorites_page.find_elements(css: "article") }
 
 				articles.each do |article|
@@ -53,7 +54,7 @@ module Import
 
 							Sentry.capture_message("Product min price change")
 
-							check_min_price(found_product, request)
+							update_min_price(found_product, request)
 
 							Notify::Telegram.new(found_product).product_min_price_change
 
@@ -74,8 +75,7 @@ module Import
 
 					Sentry.capture_message("Add new product")
 
-					check_min_price(new_product, request)
-					Notify::Telegram.new(store.product).create_min_price_to_product
+					update_min_price(new_product, request)
 				end
 			end
 
@@ -134,12 +134,12 @@ module Import
 				price.split("\n").size > 2
 			end
 
-			def check_min_price(product, request)
-				if product.min_price.blank? || product.min_price < request.price
+			def update_min_price(product, request)
+				if product.min_price.blank? || product.min_price != request.price
 					if request.sale?
 						product.update!(min_price: request.price, sale: request.sale, old_price: request.old_price, discount: request.discount, more_price: request.raw_data['more_prices'])
 					else
-						product.update!(min_price: request.price, sale: false, more_price:request.raw_data['more_prices'])
+						product.update!(min_price: request.price, sale: false, more_price: request.raw_data['more_prices'])
 					end
 				end
 			end

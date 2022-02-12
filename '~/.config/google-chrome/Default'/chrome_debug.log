@@ -1,0 +1,52 @@
+[797578:797578:0104/172610.456780:ERROR:sandbox_linux.cc(376)] InitializeSandbox() called with multiple threads in process gpu-process.
+[797622:797806:0104/172611.920014:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 104 to 127
+[797622:797806:0104/172611.920528:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 106 to 125
+[797622:797806:0104/172611.920577:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 112 to 124
+[797622:797806:0104/172611.920609:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 102 to 123
+[797622:797806:0104/172611.920646:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 103 to 122
+[797622:797806:0104/172611.920946:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 105 to 121
+[797622:797806:0104/172611.921299:WARNING:media_session.cc(966)] RED codec red is missing an associated payload type.
+[797622:797806:0104/172611.921331:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 110 to 120
+[797622:797806:0104/172611.921362:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 111 to 119
+[797541:797564:0104/172613.492022:ERROR:chrome_browser_main_extra_parts_metrics.cc(226)] crbug.com/1216328: Checking Bluetooth availability started. Please report if there is no report that this ends.
+[797541:797564:0104/172613.492061:ERROR:chrome_browser_main_extra_parts_metrics.cc(229)] crbug.com/1216328: Checking Bluetooth availability ended.
+[797541:797564:0104/172613.492069:ERROR:chrome_browser_main_extra_parts_metrics.cc(232)] crbug.com/1216328: Checking default browser status started. Please report if there is no report that this ends.
+[797541:797564:0104/172613.904440:ERROR:chrome_browser_main_extra_parts_metrics.cc(236)] crbug.com/1216328: Checking default browser status ended.
+[797541:797541:0104/172624.902333:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://accounts.google.com/signin/chrome/sync?ssp=1&color_scheme=dark (0)
+[797541:797541:0104/172625.638085:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172625.638119:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172635.108193:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172635.108231:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172638.446327:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://accounts.google.com/signin/chrome/sync/identifier?ssp=1&color_scheme=dark&flowName=GlifDesktopChromeSync (0)
+[797541:797541:0104/172638.632561:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172638.632642:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172643.443981:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172643.444015:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172657.404977:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://accounts.google.com/signin/chrome/sync/identifier?ssp=1&color_scheme=dark&flowName=GlifDesktopChromeSync (0)
+[797541:797541:0104/172657.606814:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797541:797541:0104/172657.606849:ERROR:web_contents_delegate.cc(228)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[797622:797806:0104/172704.520921:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 104 to 127
+[797622:797806:0104/172704.521009:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 106 to 125
+[797622:797806:0104/172704.521069:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 112 to 124
+[797622:797806:0104/172704.521109:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 102 to 123
+[797622:797806:0104/172704.521150:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 103 to 122
+[797622:797806:0104/172704.521197:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 105 to 121
+[797622:797806:0104/172704.521248:WARNING:media_session.cc(966)] RED codec red is missing an associated payload type.
+[797622:797806:0104/172704.521283:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 110 to 120
+[797622:797806:0104/172704.521334:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 111 to 119
+[797622:797806:0104/172705.384795:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 104 to 127
+[797622:797806:0104/172705.384866:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 106 to 125
+[797622:797806:0104/172705.384897:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 112 to 124
+[797622:797806:0104/172705.384938:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 102 to 123
+[797622:797806:0104/172705.384991:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 103 to 122
+[797622:797806:0104/172705.385030:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 105 to 121
+[797622:797806:0104/172705.385087:WARNING:media_session.cc(966)] RED codec red is missing an associated payload type.
+[797622:797806:0104/172705.385116:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 110 to 120
+[797622:797806:0104/172705.385162:WARNING:used_ids.h(55)] Duplicate id found. Reassigning from 111 to 119
+[797622:797806:0104/172705.401228:WARNING:webrtc_voice_engine.cc(702)] Attempting to stop aecdump when no audio processing module is present
+[797580:797614:0104/172725.119964:WARNING:sqlite_persistent_store_backend_base.cc(171)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:219 to client_task_runner_.
+[797580:797611:0104/172725.121726:WARNING:sqlite_persistent_store_backend_base.cc(171)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:219 to client_task_runner_.
+[797580:797611:0104/172725.121784:WARNING:sqlite_persistent_store_backend_base.cc(171)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:219 to client_task_runner_.
+[797580:797609:0104/172725.126197:WARNING:sqlite_persistent_store_backend_base.cc(171)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:219 to client_task_runner_.
+[797580:797609:0104/172725.126229:WARNING:sqlite_persistent_store_backend_base.cc(171)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:219 to client_task_runner_.
+[797541:797541:0104/172725.137928:WARNING:pref_notifier_impl.cc(40)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

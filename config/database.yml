@@ -17,6 +17,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  port: <%= ENV['DATABASE_PORT'] || '5432' %>
+  host: <%= ENV['DATABASE_HOST'] %>
+
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
@@ -30,11 +36,9 @@ development:
 
 test:
   <<: *default
-  database: red_price_test
 
 #
 production:
   <<: *default
-  database: red_price_production
   username: red_price
   password: <%= ENV['MULTY_PARSER_DATABASE_PASSWORD'] %>

@@ -7,11 +7,17 @@ class Notify::Telegram
 	end
 
 	def product_min_price_change
-		price_from = @product.audits.last.audited_changes.values.flatten.first
-		price_to = @product.audits.last.audited_changes.values.flatten.last
+		min_price_from = @product.audits.last.audited_changes.values.flatten.first['min_price']
+		min_price_to = @product.audits.last.audited_changes.values.flatten.last['min_price']
 
 		message = "Изменилась минимальная цена на: #{@product.name}\n"
-		message += "#{price_format(price_from) } => #{price_format(price_to)}"
+		message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n"
+
+		#
+		# if @product.sale?
+		# 	message += "Распрадажа: Старая цена: #{price_format(@product.old_price)} \n"
+		# 	message += "Скидкв: #{@product.discount} % \n"
+		# end
 
 		send_message(message)
 	end
