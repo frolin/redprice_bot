@@ -29,7 +29,7 @@ services:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
     env_file: .env
-    command: bundle exec sidekiq -c 50
+    command: bundle exec sidekiq -C config/sidekiq.yml
 
   chrome:
     image: selenium/standalone-chrome-debug:latest
