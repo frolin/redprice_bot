@@ -1,5 +1,6 @@
 FROM ruby:3-alpine AS ruby_base
 
+ENV APP_HOME="/red_price_bot"
 RUN apk --no-cache add \
      build-base tzdata openrc coreutils imagemagick \
     curl tar git bash  openssh-client pv less mc vim \
