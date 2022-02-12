@@ -6,7 +6,7 @@ RUN apk --no-cache add \
     postgresql-dev postgresql-client \
     nodejs npm
 
-COPY ./.bashrc /root
+#COPY ./.bashrc /root
 
 WORKDIR $APP_HOME
 
