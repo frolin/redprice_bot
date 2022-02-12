@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
       # Telegram session store
   config.cache_store = :redis_store, ENV['REDIS_URL']
   config.telegram_updates_controller.session_store = :redis_store, {expires_in: 1.month}
