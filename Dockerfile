@@ -11,5 +11,6 @@ RUN apk --no-cache add \
 WORKDIR $APP_HOME
 
 RUN gem install bundler
+RUN bundle install
 
 EXPOSE 3000

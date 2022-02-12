@@ -20,7 +20,7 @@ services:
 
   bot:
     build: .
-    command: bash -c "rake telegram:bot:set_webhook RAILS_ENV=production"
+    command: bash -c "bundle install && rake telegram:bot:set_webhook RAILS_ENV=production"
     volumes:
       - .:/redprice_bot
 #    ports:
