@@ -14,18 +14,18 @@ services:
     ports:
       - "5432:5432"
 
-  sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-      - redis
-    volumes:
-      - .:/app
-      - gem_cache:/usr/local/bundle/gems
-    env_file: .env
-    command: bundle exec sidekiq -C config/sidekiq.yml
+#  sidekiq:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - db
+#      - redis
+#    volumes:
+#      - .:/app
+#      - gem_cache:/usr/local/bundle/gems
+#    env_file: .env
+#    command: bundle exec sidekiq -C config/sidekiq.yml
 
   chrome:
     image: selenium/standalone-chrome-debug:latest
@@ -41,8 +41,20 @@ services:
       - default
 
   redis:
-    image: redis
+    image: 'redis:5-alpine'
     command: redis-server
+    ports:
+      - '6379:6379'
+
+  sidekiq:
+    depends_on:
+      - 'redis'
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/myapp
+    env_file:
+    - .env
 
 volumes:
   postgres:
