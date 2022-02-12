@@ -21,8 +21,8 @@ services:
   bot:
 #    build: .
     command: bash -c "rake telegram:bot:set_webhook RAILS_ENV=production"
-#    volumes:
-#      - .:/myapp
+    volumes:
+      - .:/myapp
 #    ports:
 #      - "3000:3000"
     depends_on:
