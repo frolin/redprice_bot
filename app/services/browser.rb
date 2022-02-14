@@ -46,6 +46,8 @@ class Browser
 		options.add_argument('disable-web-security')
 		options.add_argument('disable-infobars')
 		options.add_argument('disable-translate')
+
+		# PROFILE
 		options.add_argument('allow-profiles-outside-user-dir')
 		options.add_argument("user-data-dir=/home/seluser/chrome_profile")
 		options.add_argument("profile-directory=Profile 1")
@@ -54,7 +56,7 @@ class Browser
 		# options.add_argument("headless")
 
 
-		@chrome ||= Selenium::WebDriver.for(:remote, :url => 'http://0.0.0.0:4444/wd/hub', capabilities: [options])
+		@chrome ||= Selenium::WebDriver.for(:remote, :url => ENV['CHROME_ADDRESS'], capabilities: [options])
 	end
 
 	def take_proxy

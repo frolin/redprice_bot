@@ -1,45 +1,59 @@
 class Notify::Telegram
 	include ActionView::Helpers::NumberHelper
 
-	def initialize(product)
-		@product = product
-		@user = product.user
+	def initialize(products:, user:)
+		@products = products
+		@user = user
+		@messages = []
 	end
 
 	def product_min_price_change
-		min_price_from = @product.audits.last.audited_changes.values.flatten.first['min_price']
-		min_price_to = @product.audits.last.audited_changes.values.flatten.last['min_price']
+		@products.each do |product|
+			min_price_from = product.audits.last.audited_changes.values.flatten.first['min_price']
+			min_price_to = product.audits.last.audited_changes.values.flatten.last['min_price']
 
-		message = "Изменилась минимальная цена на: #{@product.name}\n"
-		message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n"
+			message = "Изменилась минимальная цена на: #{product.name}\n"
+			message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n"
 
-		#
-		# if @product.sale?
-		# 	message += "Распрадажа: Старая цена: #{price_format(@product.old_price)} \n"
-		# 	message += "Скидкв: #{@product.discount} % \n"
-		# end
+			@messages << message
 
-		send_message(message)
+			#
+			# if product.sale?
+			# 	message += "Распрадажа: Старая цена: #{price_format(product.old_price)} \n"
+			# 	message += "Скидкв: #{product.discount} % \n"
+			# end
+		end
+
+		send_report(@messages)
 	end
 
 	def create_min_price_to_product
-		message = "Добавлен продукт: #{@product.name}\n"
-		message += "Минимальная цена: #{price_format(@product.min_price)}\n"
+		@products.each do |product|
 
-		if @product.sale?
-			message += "Старая цена: #{price_format(@product.old_price)} \n"
-			message += "Скидкв: #{@product.discount} % \n"
+			message = "Добавлен продукт: #{product.name}\n"
+			message += "Минимальная цена: #{price_format(product.min_price)}\n"
+
+			if product.sale?
+				message += "Старая цена: #{price_format(product.old_price)} \n"
+				message += "Скидкв: #{product.discount} % \n"
+			end
+
+			message += "#{price_format(product.more_price)}\n" if product.more_price.present?
+
+			@messages << message
 		end
 
-		message += "#{price_format(@product.more_price)}\n"
-
-		send_message(message)
+		send_report(@messages)
 	end
 
 	private
 
 	def send_message(message)
 		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: message)
+	end
+
+	def send_report(html)
+		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: html, parse_mode: :html)
 	end
 
 	def price_format(price)

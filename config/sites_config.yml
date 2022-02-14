@@ -44,7 +44,7 @@ ym_f:
   attributes:
     name: "data-zone-name='title'"
     price: "data-zone-name='price'"
-    more_prices: "data-zone-name='more-prices'"
+#    more_prices: "data-zone-name='more-prices'"
 
 #    price_data: "data-widget='webSale'"
 Sber:

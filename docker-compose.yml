@@ -7,8 +7,6 @@ networks:
 services:
   db:
     image: postgres
-    hostname: db
-    container_name: db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -18,17 +16,53 @@ services:
     ports:
       - "5432:5432"
 
-  bot:
-    build: .
-    command: bash -c "rake telegram:bot:set_webhook RAILS_ENV=production"
-    volumes:
-      - .:/app
+  app:
     depends_on:
       - db
+      - worker
+      - chrome
+    build: .
+    command: bundle exec rails s -b 0.0.0.0
+    stdin_open: true
+    tty: true
+    environment:
+      - RAILS_ENV=development
+      - BOOTSNAP=true
+    volumes:
+      - .:/app
+    env_file:
+    - .env.dev
+    ports:
+      - "3000:3000"
+
+
+  worker:
+    depends_on:
+      - redis
+    build: .
+    command: bundle exec sidekiq
+    stdin_open: true
+    tty: true
+    environment:
+      - RAILS_ENV=development
+      - BOOTSNAP=true
+    volumes:
+      - .:/app
+    env_file:
+      - .env.dev
+    networks:
+      - default
 
   chrome:
     image: selenium/standalone-chrome-debug:latest
     # Debug version enables VNC ability
+    environment:
+      - NODE_MAX_INSTANCES=5
+      - NODE_MAX_SESSION=5
+    shm_size: 2g
+    privileged: true
+    volumes:
+      - /dev/shm:/dev/shm
     ports:
       - '4444:4444'
       - '5900:5900'
@@ -36,12 +70,11 @@ services:
       #    logging:
       #      driver: none
       # Disable noisy logs.
-    networks:
-      - default
 
   redis:
     image: redis
     ports:
       - "6379:6379"
+
 volumes:
   postgres:

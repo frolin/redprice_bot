@@ -91,3 +91,4 @@ gem "sentry-sidekiq"
 gem 'proxy_fetcher', '~> 0.14'
 gem "watir-rails"
 gem "ferrum"
+gem 'dotenv-rails', require: 'dotenv/rails-now'

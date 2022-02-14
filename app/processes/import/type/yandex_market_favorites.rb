@@ -19,15 +19,18 @@ module Import
 			def get_products
 				@products = []
 
-				wait = Selenium::WebDriver::Wait.new(:timeout => 30) # seconds
+				@wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
 
-				# binding.pry
-				articles = wait.until { favorites_page.find_elements(css: "article") }
+				articles = @wait.until { favorites_page.find_elements(css: "article") }
 
 				articles.each do |article|
 					result = {}
 					attributes.each do |name, attr|
-						result[name] = wait.until { article.find_element(xpath: ".//*[@#{attr}]").text }
+						begin
+							result[name] = @wait.until { article.find_element(xpath: ".//*[@#{attr}]").text }
+						rescue => e
+							nil
+						end
 					end
 
 					@products << result
@@ -35,18 +38,23 @@ module Import
 			end
 
 			def check_products
-				@found = []
-				@not_found = []
+				@new_products = []
+				@product_price_changed = []
 
 				@products.each do |product|
-					found_product = find_products_by_name(product['name'])
+					begin
+						found_product = find_products_by_name(product['name'])
+					rescue
+						binding.pry
+					end
 
 					if found_product.present?
-						@found << found_product
+
 
 						formatted_price = price_format(product['price'])
 
 						if found_product.min_price != formatted_price[:price]
+							@product_price_changed << found_product
 							request = found_product.favorite_store.requests.new(formatted_price)
 							request.audit_comment = "updated from yandex_market_favorites"
 							request.raw_data = product
@@ -55,9 +63,6 @@ module Import
 							Sentry.capture_message("Product min price change")
 
 							update_min_price(found_product, request)
-
-							Notify::Telegram.new(found_product).product_min_price_change
-
 							next
 						end
 
@@ -73,10 +78,16 @@ module Import
 					request.raw_data = product
 					new_product.save!
 
+					@new_products << new_product
+
 					Sentry.capture_message("Add new product")
 
 					update_min_price(new_product, request)
 				end
+
+
+				Notify::Telegram.new(products: @product_price_changed, user: user).product_min_price_change
+				Notify::Telegram.new(products: @new_products, user: user).create_min_price_to_product
 			end
 
 			def favorites_page
