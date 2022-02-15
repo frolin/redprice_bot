@@ -40,6 +40,8 @@ services:
   redis:
     image: 'redis:5-alpine'
     command: redis-server
+    volumes:
+      - /tmp:/data
     ports:
       - '6379:6379'
 
