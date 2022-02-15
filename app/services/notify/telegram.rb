@@ -30,11 +30,11 @@ class Notify::Telegram
 		@products.each do |product|
 
 			message =  "👌 Добавлен: #{product.name}\n"
-			message += "Мин. цена: #{price_format(product.min_price)}\n"
+			message += "Мин. цена: #{price_format(product.min_price)}\n\n"
 
 			if product.sale?
 				message += "Старая цена: #{price_format(product.old_price)} \n"
-				message += "Скидкв: #{product.discount} % \n"
+				message += "Скидкв: #{product.discount} % \n\n"
 			end
 
 			message += "#{price_format(product.more_price)}\n" if product.more_price.present?
