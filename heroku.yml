@@ -2,8 +2,10 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: bundle exec rails s -b 0.0.0.0
+  app: bundle exec rails s -b 0.0.0.0
   worker: bundle exec sidekiq
+
+
 
 setup:
   addons:
