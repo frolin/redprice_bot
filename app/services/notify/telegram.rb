@@ -12,12 +12,11 @@ class Notify::Telegram
 			min_price_from = product.audits.last.audited_changes.values.flatten.first['min_price']
 			min_price_to = product.audits.last.audited_changes.values.flatten.last['min_price']
 
-			message = "🤌 Изменилась минимальная цена на: #{product.name}\n"
+			message = "🤌: #{product.name}\n"
 			message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n\n"
 
 			@messages << message
 
-			#
 			# if product.sale?
 			# 	message += "Распрадажа: Старая цена: #{price_format(product.old_price)} \n"
 			# 	message += "Скидкв: #{product.discount} % \n"
@@ -30,8 +29,8 @@ class Notify::Telegram
 	def create_min_price_to_product
 		@products.each do |product|
 
-			message =  "👌 Добавлен продукт: #{product.name}\n"
-			message += "Минимальная цена: #{price_format(product.min_price)}\n"
+			message =  "👌 Добавлен: #{product.name}\n"
+			message += "Мин. цена: #{price_format(product.min_price)}\n"
 
 			if product.sale?
 				message += "Старая цена: #{price_format(product.old_price)} \n"
