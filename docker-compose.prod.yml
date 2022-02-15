@@ -60,3 +60,4 @@ services:
 volumes:
   postgres:
   gem_cache:
+  redis:
