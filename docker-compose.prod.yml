@@ -14,18 +14,17 @@ services:
     ports:
       - "5432:5432"
 
-#  sidekiq:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    depends_on:
-#      - db
-#      - redis
-#    volumes:
-#      - .:/app
-#
-#    env_file: .env.dev
-#    command: bundle exec sidekiq -C config/sidekiq.yml
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app
+    env_file: .env.prod
+    command: bundle exec rails s -b 0.0.0.0
 
   chrome:
     image: selenium/standalone-chrome-debug:latest
@@ -34,11 +33,9 @@ services:
       - '4444:4444'
       - '5900:5900'
       # Bind selenium port & VNC port
-      #    logging:
-      #      driver: none
+    logging:
+      driver: none
       # Disable noisy logs.
-    networks:
-      - default
 
   redis:
     image: 'redis:5-alpine'
@@ -53,8 +50,7 @@ services:
     command: bundle exec sidekiq
     volumes:
       - .:/app
-    env_file:
-    - .env.prod
+    env_file: .env.prod
 
 volumes:
   postgres:
