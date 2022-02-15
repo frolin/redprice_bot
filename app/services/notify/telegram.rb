@@ -49,10 +49,14 @@ class Notify::Telegram
 	private
 
 	def send_message(message)
+		return unless message.present?
+
 		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: message)
 	end
 
 	def send_report(html)
+		return unless html.present?
+
 		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: html, parse_mode: :html)
 	end
 

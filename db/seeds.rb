@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Product.create(name: 'LEGO DUPLO Town 10840', min_price: '3000', max_price: '3500')
-Product.create(name: 'LEGO Technic 42110 Land Rover Defender', min_price: '6000', max_price: '7000')
-menu = Menu.new(name: 'main', title: 'Главное меню' )
-menu.menu_items.new(title: 'Сделай так')
-menu.menu_items.new(title: 'Сделай иначе')
-
-menu.save!
+# Product.create(name: 'LEGO DUPLO Town 10840', min_price: '3000', max_price: '3500')
+# Product.create(name: 'LEGO Technic 42110 Land Rover Defender', min_price: '6000', max_price: '7000')
+# menu = Menu.new(name: 'main', title: 'Главное меню' )
+# menu.menu_items.new(title: 'Сделай так')
+# menu.menu_items.new(title: 'Сделай иначе')
+#
+# menu.save!
 
 
 User.create(username: 'fralunia')
