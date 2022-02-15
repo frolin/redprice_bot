@@ -44,7 +44,7 @@ services:
     image: 'redis:5-alpine'
     command: redis-server
     volumes:
-      - /tmp:/data
+      - 'redis:/var/lib/redis'
     ports:
       - '6379:6379'
 
