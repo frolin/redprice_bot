@@ -12,8 +12,8 @@ class Notify::Telegram
 			min_price_from = product.audits.last.audited_changes.values.flatten.first['min_price']
 			min_price_to = product.audits.last.audited_changes.values.flatten.last['min_price']
 
-			message = "Изменилась минимальная цена на: #{product.name}\n"
-			message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n"
+			message = "🤌 Изменилась минимальная цена на: #{product.name}\n"
+			message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n\n"
 
 			@messages << message
 
@@ -30,7 +30,7 @@ class Notify::Telegram
 	def create_min_price_to_product
 		@products.each do |product|
 
-			message = "Добавлен продукт: #{product.name}\n"
+			message =  "👌 Добавлен продукт: #{product.name}\n"
 			message += "Минимальная цена: #{price_format(product.min_price)}\n"
 
 			if product.sale?
@@ -57,7 +57,7 @@ class Notify::Telegram
 	def send_report(html)
 		return unless html.present?
 
-		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: html, parse_mode: :html)
+		Telegram.bot.send_message(chat_id: @user.telegram['chat_id'], text: html.join, parse_mode: :html)
 	end
 
 	def price_format(price)
