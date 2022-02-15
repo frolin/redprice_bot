@@ -23,6 +23,8 @@ module Import
 
 				articles = @wait.until { favorites_page.find_elements(css: "article") }
 
+				raise "not found" if articles.blank?
+
 				articles.each do |article|
 					result = {}
 					attributes.each do |name, attr|
