@@ -15,5 +15,5 @@
 #
 # menu.save!
 
-
+# Browser.new('https://market.yandex.ru/my/wishlist').run
 User.create(username: 'fralunia')

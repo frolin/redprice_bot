@@ -36,17 +36,21 @@ services:
       - '4444:4444'
       - '5900:5900'
       # Bind selenium port & VNC port
-    logging:
-      driver: none
+   volumes:
+     -./config/chrome_profile:/home/seluser/chrome_profile
+   logging:
+     driver: none
       # Disable noisy logs.
 
   redis:
-    image: 'redis:5-alpine'
-    command: redis-server
+    image: redis:alpine
+    command: redis-server --include /usr/local/etc/redis/redis.conf
     volumes:
-      - 'redis:/var/lib/redis'
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - '6379:6379'
+    restart: always
+    
 
   sidekiq:
     depends_on:
