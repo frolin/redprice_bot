@@ -46,8 +46,8 @@ module Import
 				@products.each do |product|
 					begin
 						found_product = find_products_by_name(product['name'])
-					rescue
-						binding.pry
+					rescue => e
+						p e
 					end
 
 					if found_product.present?
