@@ -23,6 +23,7 @@ services:
       - redis
     volumes:
       - .:/app
+      - ~/.zsh_history:/root/.zsh_history
     env_file: .env.prod
     ports:
       - "3000:3000"
