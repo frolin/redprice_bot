@@ -43,6 +43,9 @@ services:
       # Disable noisy logs.
 
   redis:
+    build:
+      context: .
+      dockerfile: Dockerfile-Redis
     image: redis:alpine
     command: redis-server --include /usr/local/etc/redis/redis.conf
     volumes:
