@@ -44,14 +44,11 @@ module Import
 				@product_price_changed = []
 
 				@products.each do |product|
-					begin
-						found_product = find_products_by_name(product['name'])
-					rescue => e
-						p e
-					end
+					next if product['name'].blank?
+
+					found_product = find_products_by_name(product['name'])
 
 					if found_product.present?
-
 
 						formatted_price = price_format(product['price'])
 
@@ -86,7 +83,6 @@ module Import
 
 					update_min_price(new_product, request)
 				end
-
 
 				Notify::Telegram.new(products: @product_price_changed, user: user).product_min_price_change
 				Notify::Telegram.new(products: @new_products, user: user).create_min_price_to_product
