@@ -47,6 +47,7 @@ services:
     command: redis-server --include /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/data:/dfata
     ports:
       - '6379:6379'
     restart: always
