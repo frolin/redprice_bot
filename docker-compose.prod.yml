@@ -44,13 +44,10 @@ services:
 
   redis:
     image: redis:alpine
-    build:
-      context: .
-      dockerfile: redis/Dockerfile
-    command: redis-server /usr/local/etc/redis/redis.conf
+    command: redis-server --include /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
-      - ./redis/data:/data
+      - ./redis/data:/dfata
     ports:
       - '6379:6379'
     restart: always
