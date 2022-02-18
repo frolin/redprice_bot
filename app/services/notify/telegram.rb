@@ -13,14 +13,15 @@ class Notify::Telegram
 			min_price_to = product.audits.last.audited_changes.values.flatten.last['min_price']
 
 			message = "🤌: #{product.name}\n"
-			message += "#{price_format(min_price_from) } => #{price_format(min_price_to)}\n\n"
+			message += "#{price_format(min_price_from) } \n"
+			message += "#{price_format(min_price_to)}\n\n"
 
 			@messages << message
 
-			# if product.sale?
-			# 	message += "Распрадажа: Старая цена: #{price_format(product.old_price)} \n"
-			# 	message += "Скидкв: #{product.discount} % \n"
-			# end
+			if product.sale?
+				message += "Распрадажа: Старая цена: #{price_format(product.old_price)} \n"
+				message += "Скидкв: #{product.discount} % \n"
+			end
 		end
 
 		send_report(@messages)

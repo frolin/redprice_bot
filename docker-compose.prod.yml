@@ -37,8 +37,8 @@ services:
       - '4444:4444'
       - '5900:5900'
       # Bind selenium port & VNC port
-#    volumes:
-#      - ./config/chrome_profile:/home/seluser/chrome_profile
+    volumes:
+      - ./config/chrome_profile:/home/seluser/chrome_profile
     logging:
       driver: none
       # Disable noisy logs.
