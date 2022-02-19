@@ -4,10 +4,7 @@ services:
   db:
     image: postgres
     hostname: db
-    container_name: db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -48,7 +45,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Redis
-    image: redis:alpine
     command: redis-server --include /usr/local/etc/redis/redis.conf --protected-mode no
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
