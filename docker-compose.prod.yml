@@ -39,7 +39,7 @@ services:
       # Bind selenium port & VNC port
     volumes:
       - /dev/shm:/dev/shm
-      - /chrome_profile:/home/seluser/chrome_profile/Profile 1
+      - profile:/home/seluser/chrome_profile
     logging:
       driver: none
       # Disable noisy logs.
@@ -70,3 +70,4 @@ volumes:
   postgres:
   gem_cache:
   redis:
+  profile:
