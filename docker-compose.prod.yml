@@ -39,7 +39,7 @@ services:
       # Bind selenium port & VNC port
     volumes:
       - /dev/shm:/dev/shm
-      - /tmp/chrome:/tmp/chrome_profiles
+      - /chrome_profile:/home/seluser/chrome_profile/Profile 1
     logging:
       driver: none
       # Disable noisy logs.

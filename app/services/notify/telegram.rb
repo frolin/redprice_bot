@@ -28,10 +28,10 @@ class Notify::Telegram
 	end
 
 	def create_min_price_to_product
-		message = "👌 Новые товары"
+		message = "👌 Новые товары \n"
 
 		@products.each do |product|
-			message += "#{product.name}\n"
+			message += "- #{product.name}\n"
 			message += "Мин. цена: #{price_format(product.min_price)}\n\n"
 
 			if product.sale?
