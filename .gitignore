@@ -39,5 +39,6 @@
 /config/credentials/development.key
 
 /config/credentials/production.key
+
 /config/chrome_profile/
 /config/chrome_profile/*
