@@ -1,4 +1,4 @@
-FROM redis-alpine
+FROM redis:alpine
 CMD ["chown", "redis:redis", "-R", "/etc"]
 CMD ["chown", "redis:redis", "-R", "/var/lib"]
 CMD ["chown", "redis:redis", "-R", "/run"]
