@@ -42,8 +42,10 @@ wb:
 
 ym_f:
   attributes:
-    name: "data-zone-name='title'"
-    price: "data-zone-name='price'"
+    name_data: "data-zone-name='title'"
+    price_data: "data-zone-name='price'"
+    product_link: "data-zone-name='title'"
+    price_link: "data-zone-name='price'"
 #    more_prices: "data-zone-name='more-prices'"
 
 #    price_data: "data-widget='webSale'"

@@ -27,9 +27,10 @@ module Import
 
 				articles.each do |article|
 					result = {}
+
 					attributes.each do |name, attr|
 						begin
-							result[name] = @wait.until { article.find_element(xpath: ".//*[@#{attr}]").text }
+							result[name] = find_element_type(data: article, type: name, value: attr)
 						rescue => e
 							nil
 						end
@@ -44,16 +45,14 @@ module Import
 				@product_price_changed = []
 
 				@products.each do |product|
-					next if product['name'].blank?
+					next if product['name_data'].blank?
 
-					found_product = find_products_by_name(product['name'])
+					found_product = find_products_by_name(product['name_data'])
+					formatted_price = price_format(product['price_data'])
 
 					if found_product.present?
 
-						formatted_price = price_format(product['price'])
-
 						if found_product.min_price != formatted_price[:price]
-							@product_price_changed << found_product
 							request = found_product.favorite_store.requests.new(formatted_price)
 							request.audit_comment = "updated from yandex_market_favorites"
 							request.raw_data = product
@@ -62,16 +61,20 @@ module Import
 							Sentry.capture_message("Product min price change")
 
 							update_min_price(found_product, request)
+							Notify::Telegram.new(product: found_product, user: user).product_min_price_change
+
 							next
 						end
 
 						Sentry.capture_message("Product price mot changed")
+
 						next
 					end
 
-					formatted_price = price_format(product['price'])
+					new_product = user.products.new(name: product['name_data'],
+					                                product_link: product['product_link'],
+					                                price_link: product['price_link'])
 
-					new_product = user.products.new(name: product['name'])
 					store = new_product.stores.new(name: 'YM_F', slug: 'ym_f', url: 'https://market.yandex.ru/my/wishlist')
 					request = store.requests.new(formatted_price)
 					request.raw_data = product
@@ -84,7 +87,6 @@ module Import
 					update_min_price(new_product, request)
 				end
 
-				Notify::Telegram.new(products: @product_price_changed, user: user).product_min_price_change
 				Notify::Telegram.new(products: @new_products, user: user).create_min_price_to_product
 			end
 
@@ -100,15 +102,18 @@ module Import
 				Product.find_by('name ILIKE ?', "%#{name.strip}%")
 			end
 
-			def find_element_type(type, value)
+			def find_element_type(data:, type:, value:)
 				type = type.split('_').last
 
 				case type
 				when 'data'
-					element = @wait.until { page.find_element(xpath: "//*[@#{value}]").attribute("innerHTML") }
+
+					element = @wait.until { data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML") }
 					element = ActionView::Base.full_sanitizer.sanitize(element)
+				when 'link'
+					element = @wait.until { data.find_element(xpath: ".//*[@#{value}]").find_element(:css, 'a').attribute('href') }
 				else
-					element = @wait.until { page.find_element(css: value) }
+					element = @wait.until { data.find_element(css: value) }
 				end
 
 				element

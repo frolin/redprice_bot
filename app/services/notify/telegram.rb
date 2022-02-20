@@ -1,13 +1,14 @@
 class Notify::Telegram
 	include ActionView::Helpers::NumberHelper
 
-	def initialize(products:, user:)
+	def initialize(products: nil, product: nil, user:)
 		@products = products
+		@product = product
 		@user = user
 		@messages = []
 	end
 
-	def product_min_price_change
+	def products_min_price_change
 		@products.each do |product|
 			min_price_from = product.audits.last.audited_changes.values.flatten.first['min_price']
 			min_price_to = product.audits.last.audited_changes.values.flatten.last['min_price']
@@ -26,11 +27,21 @@ class Notify::Telegram
 		send_report(@messages)
 	end
 
+	def product_min_price_change
+		min_price_from = @product.audits.last.audited_changes.values.flatten.first['min_price']
+		min_price_to = @product.audits.last.audited_changes.values.flatten.last['min_price']
+
+		message = "🤌 #{@product.name}\n"
+		message += "Старая цена: #{price_format(min_price_from) } \n"
+		message += "Новая цена: #{price_format(min_price_to)}\n\n"
+
+		send_message(message)
+	end
+
 	def create_min_price_to_product
-		message = "👌 Новые товары \n"
 
 		@products.each do |product|
-			message += "- #{product.name}\n"
+			message = "- #{product.name}\n"
 			message += "Мин. цена: #{price_format(product.min_price)}\n\n"
 
 			if product.sale?
@@ -42,7 +53,11 @@ class Notify::Telegram
 			@messages << message
 		end
 
-		send_report(@messages)
+		if @messages.size > 10
+			@messages.each_slice(10) { |msg| send_report(msg) }
+		else
+			send_report(@messages)
+		end
 	end
 
 	private
