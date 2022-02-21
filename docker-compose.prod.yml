@@ -47,6 +47,7 @@ services:
 #    build:
 #      context: .
 #      dockerfile: Dockerfile-Redis
+    image: redis
     user: root
     command: redis-server --include /usr/local/etc/redis/redis.conf --protected-mode no
     volumes:
