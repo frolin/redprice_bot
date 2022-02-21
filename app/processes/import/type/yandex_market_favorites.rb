@@ -47,7 +47,8 @@ module Import
 				@products.each do |product|
 					next if product['name_data'].blank?
 
-					found_product = find_products_by_name(product['name_data'])
+					link_data = get_link_params(product['product_link'])
+					found_product = Product.find_by(sku: link_data['sku'])
 					formatted_price = price_format(product['price_data'])
 
 					if found_product.present?
@@ -73,7 +74,9 @@ module Import
 
 					new_product = user.products.new(name: product['name_data'],
 					                                product_link: product['product_link'],
-					                                price_link: product['price_link'])
+					                                price_link: product['price_link'],
+					                                sku: link_data['sku'])
+					new_product.link_data = link_data
 
 					store = new_product.stores.new(name: 'YM_F', slug: 'ym_f', url: 'https://market.yandex.ru/my/wishlist')
 					request = store.requests.new(formatted_price)
@@ -98,20 +101,21 @@ module Import
 				@attributes ||= Store.ya_f_attributes
 			end
 
-			def find_products_by_name(name)
-				Product.find_by('name ILIKE ?', "%#{name.strip}%")
-			end
+			# def find_products_by_name(name)
+			# 	Product.find_by('name ILIKE ?', "%#{name.strip}%")
+			# end
 
 			def find_element_type(data:, type:, value:)
-				type = type.split('_').last
+				type = type.split('_').first
 
 				case type
-				when 'data'
-
+				when 'name'
 					element = data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML")
 					element = ActionView::Base.full_sanitizer.sanitize(element)
 				when 'link'
 					element = data.find_element(xpath: ".//*[@#{value}]").find_element(:css, 'a').attribute('href')
+				when 'price'
+					element = data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML")
 				else
 					element = data.find_element(css: value)
 				end
@@ -145,7 +149,7 @@ module Import
 			end
 
 			def product_with_sale?(price)
-				price.split("\n").size > 2
+				price.split("\n").size > 2 || price.split("₽").size > 2
 			end
 
 			def update_min_price(product, request)
@@ -156,6 +160,11 @@ module Import
 						product.update!(min_price: request.price, sale: false, more_price: request.raw_data['more_prices'])
 					end
 				end
+			end
+
+			def get_link_params(link)
+				uri = URI.parse(link)
+				URI.decode_www_form(uri.query).to_h
 			end
 
 		end
