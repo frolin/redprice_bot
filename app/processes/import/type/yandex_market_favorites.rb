@@ -106,16 +106,22 @@ module Import
 			# end
 
 			def find_element_type(data:, type:, value:)
-				type = type.split('_').first
-
 				case type
-				when 'name'
+				when 'name_data'
 					element = data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML")
 					element = ActionView::Base.full_sanitizer.sanitize(element)
-				when 'link'
+				when 'product_link', 'price_link'
 					element = data.find_element(xpath: ".//*[@#{value}]").find_element(:css, 'a').attribute('href')
-				when 'price'
-					element = data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML")
+				when 'price_data'
+					price = data.find_element(xpath: ".//*[@#{value}]")
+					prices = price.find_elements(css: 'span')
+
+					if prices.size > 3
+						element = ActionView::Base.full_sanitizer.sanitize(prices[0].attribute("innerHTML"))
+					else
+						element = ActionView::Base.full_sanitizer.sanitize(price.attribute("innerHTML"))
+					end
+
 				else
 					element = data.find_element(css: value)
 				end
