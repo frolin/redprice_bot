@@ -8,5 +8,5 @@ RUN chmod 755 /etc
 RUN chmod 770 /var/lib/
 RUN chmod 777 /run
 
-RUN mkdir -p /opt/redis/{etc,data}
-RUN mkdir /opt/redis/data/{bases,log}
+#RUN mkdir -p /opt/redis/{etc,data}
+#RUN mkdir /opt/redis/data/{bases,log}
