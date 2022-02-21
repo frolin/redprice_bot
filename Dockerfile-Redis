@@ -3,10 +3,10 @@ RUN chown -R redis:redis /etc
 RUN chown -R redis:redis /var/lib/
 RUN chown -R redis:redis /run
 
-RUN sudo chmod 644 /data/dump.rdb
-RUN sudo chmod 755 /etc
-RUN sudo chmod 770 /var/lib/
-RUN sudo chmod 777 /run
+RUN chmod 644 /data/dump.rdb
+RUN chmod 755 /etc
+RUN chmod 770 /var/lib/
+RUN chmod 777 /run
 
 #CMD ["chown", "redis:redis", "-R", "/etc"]
 #CMD ["chown", "redis:redis", "-R", "/var/lib"]
