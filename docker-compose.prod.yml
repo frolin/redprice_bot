@@ -44,10 +44,10 @@ services:
       # Disable noisy logs.
 
   redis:
-    build:
-      context: .
-      dockerfile: Dockerfile-Redis
-    user: redis
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-Redis
+    user: root
     command: redis-server --include /usr/local/etc/redis/redis.conf --protected-mode no
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
