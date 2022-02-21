@@ -47,7 +47,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Redis
-    command: redis-server --include /usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - ./redis/etc/redis.conf:/usr/local/etc/redis/redis.conf
       - ./redis/data:/data
