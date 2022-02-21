@@ -19,7 +19,7 @@ module Import
 			def get_products
 				@products = []
 
-				@wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
+				@wait = Selenium::WebDriver::Wait.new(:timeout => 1) # seconds
 
 				articles = @wait.until { favorites_page.find_elements(css: "article") }
 
@@ -108,12 +108,12 @@ module Import
 				case type
 				when 'data'
 
-					element = @wait.until { data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML") }
+					element = data.find_element(xpath: ".//*[@#{value}]").attribute("innerHTML")
 					element = ActionView::Base.full_sanitizer.sanitize(element)
 				when 'link'
-					element = @wait.until { data.find_element(xpath: ".//*[@#{value}]").find_element(:css, 'a').attribute('href') }
+					element = data.find_element(xpath: ".//*[@#{value}]").find_element(:css, 'a').attribute('href')
 				else
-					element = @wait.until { data.find_element(css: value) }
+					element = data.find_element(css: value)
 				end
 
 				element
