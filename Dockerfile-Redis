@@ -7,6 +7,9 @@ RUN #chmod 644 /data/dump.rdb
 RUN chmod 755 /etc
 RUN chmod 770 /var/lib/
 RUN chmod 777 /run
+
+RUN apk add nano
+
 #CMD ["chown", "redis:redis", "-R", "/etc"]
 #CMD ["chown", "redis:redis", "-R", "/var/lib"]
 #CMD ["chown", "redis:redis", "-R", "/run"]
