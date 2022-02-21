@@ -5,6 +5,8 @@ services:
     image: postgres
     hostname: db
     environment:
+      POSTGRES_USER: red_price
+      POSTGRES_PASSWORD: red_price
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
