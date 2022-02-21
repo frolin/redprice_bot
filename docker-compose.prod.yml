@@ -47,7 +47,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Redis
-    user: root
     command: redis-server --include /usr/local/etc/redis/redis.conf --protected-mode no
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
@@ -55,6 +54,7 @@ services:
     ports:
       - '6379:6379'
     restart: always
+
 
 
   sidekiq:
