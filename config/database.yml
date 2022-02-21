@@ -37,5 +37,5 @@ test:
 
 #
 production:
-  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   password: <%= ENV['MULTY_PARSER_DATABASE_PASSWORD'] %>
