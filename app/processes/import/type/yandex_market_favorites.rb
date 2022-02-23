@@ -48,10 +48,10 @@ module Import
 
 					@product = product
 
-					link_data = get_link_params(product['product_link'])
 					product_price = price_format(product['price_data'])
-
 					next if product_price[:price].blank?
+
+					found_product = find_product
 
 					if found_product
 
@@ -74,10 +74,12 @@ module Import
 
 					else
 
+						link_data = get_link_params(product['product_link'])
 						new_product = user.products.new(name: product['name_data'],
 						                                product_link: product['product_link'],
 						                                price_link: product['price_link'],
 						                                sku: link_data['sku'])
+
 						new_product.link_data = link_data
 
 						store = new_product.stores.new(name: 'YM_F', slug: 'ym_f', url: 'https://market.yandex.ru/my/wishlist')
@@ -97,13 +99,16 @@ module Import
 				Notify::Telegram.new(products: @new_products, user: user).create_min_price_to_product
 			end
 
-			def found_product
+			def find_product
 				params = get_link_params(@product['product_link']) || @product['product_link_pic']
 				return unless params
 
-				user.products.find_by("link_data->>'show-uid' = ?", params['show_uid']) ||
+				if params['modelid']
+					user.products.find_by("link_data->>'modelid' = ?", params['modelid'])
+				else
 					user.products.find_by('name ILIKE ?', "%#{@product['name_data']&.strip}%") ||
-					user.products.find_by(sku: params['sku'])
+						user.products.find_by(sku: params['sku'])
+				end
 
 				# || found_products_by_sku_nid(nid: params['nid'], sku: params['sku'])
 			end
@@ -164,7 +169,7 @@ module Import
 					price.map! { |p| p.gsub(/[[:space:]]/, '') } # price\n old_price\n discount
 					{ price: price.first.to_i, old_price: price.second.to_i, discount: price.third.to_i, sale: true }
 				else
-					{ price: price.first, sale: false }
+					{ price: price.first.gsub(/[[:space:]]/, '').to_i, sale: false }
 				end
 			end
 
@@ -173,7 +178,7 @@ module Import
 			end
 
 			def update_min_price(product, request)
-				return if product.min_price.present? || product.min_price == request.price
+				return if product.min_price == request.price
 
 				if request.sale?
 					product.update!(min_price: request.price, sale: request.sale, old_price: request.old_price, discount: request.discount, more_price: request.raw_data['more_prices'])
