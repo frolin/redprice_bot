@@ -67,8 +67,8 @@ services:
       - '4444:4444'
       - '5900:5900'
       # Bind selenium port & VNC port
-      #    logging:
-      #      driver: none
+    logging:
+      driver: none
       # Disable noisy logs.
 
   redis:
